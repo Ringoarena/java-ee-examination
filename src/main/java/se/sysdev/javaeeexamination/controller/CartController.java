@@ -28,10 +28,11 @@ public class CartController {
     }
 
     @GetMapping("/add/{productId}")
-    public String addToCart(@PathVariable("productId") Long productId) {
+    public String addToCart(@PathVariable("productId") Long productId, Model model) {
         Optional<Product> optional = productService.findById(productId);
         if (optional.isPresent()) {
             cartService.addProductToCart(optional.get());
+            model.addAttribute("addedProduct", optional.get());
             return "cart/added_to_cart";
         } else {
             return "product/product_not_found";

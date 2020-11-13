@@ -36,6 +36,11 @@ public class CartServiceImpl implements CartService {
         }
     }
 
+    @Override
+    public int getCartItemCount() {
+        return cart.stream().mapToInt(CartItem::getQuantity).sum();
+    }
+
     private boolean cartContainsProduct(Product product) {
         return cart.stream().anyMatch(cartItem -> cartItem.getProduct().getId().equals(product.getId()));
     }

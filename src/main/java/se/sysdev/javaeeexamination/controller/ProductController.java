@@ -7,11 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import se.sysdev.javaeeexamination.controller.dto.ProductDto;
-import se.sysdev.javaeeexamination.model.Product;
+import se.sysdev.javaeeexamination.service.CartService;
 import se.sysdev.javaeeexamination.service.ProductService;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping("/products")
@@ -19,10 +16,13 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+    @Autowired
+    private CartService cartService;
 
     @GetMapping
     public String productList(Model model) {
         model.addAttribute("products", productService.findAll());
+        model.addAttribute("ciCount", cartService.getCartItemCount());
         return "product/index";
     }
 

@@ -11,5 +11,7 @@ public interface CartService {
 
     void reduceQuantity(Long productId);
 
-    public List<CartItem> getReadOnlyCart();
+    List<CartItem> getReadOnlyCart();
+
+    int getCartItemCount();
 }
