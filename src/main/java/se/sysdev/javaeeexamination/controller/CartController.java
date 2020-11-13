@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import se.sysdev.javaeeexamination.model.Product;
+import se.sysdev.javaeeexamination.service.CartService;
 import se.sysdev.javaeeexamination.service.ProductService;
 
 import java.util.Optional;
@@ -16,6 +17,8 @@ public class CartController {
 
     @Autowired
     ProductService productService;
+    @Autowired
+    CartService cartService;
 
     @GetMapping
     public String showCart() {
@@ -26,6 +29,7 @@ public class CartController {
     public String addToCart(@PathVariable("productId") Long productId) {
         Optional<Product> optional = productService.findById(productId);
         if (optional.isPresent()) {
+            cartService.addToCart(optional.get());
             return "cart/added_to_cart";
         } else {
             return "product/product_not_found";
