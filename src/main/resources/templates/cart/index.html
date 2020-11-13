@@ -14,9 +14,10 @@
         <th>Action</th>
     </tr>
     <tr th:each="item : ${cart}">
-        <td th:text="${item.getProduct().name}"></td>
-        <td th:text="${item.getProduct().price}"></td>
+        <td th:text="${item.getProduct().getName()}"></td>
+        <td th:text="${item.getProduct().getPrice()}"></td>
         <td th:text="${item.getQuantity()}"></td>
+        <td><a th:href="@{/cart/reduce/{id}(id=${item.getProduct().getId()})}">Reduce quantity</a></td>
     </tr>
 </table>
 

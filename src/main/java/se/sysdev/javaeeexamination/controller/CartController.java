@@ -31,10 +31,17 @@ public class CartController {
     public String addToCart(@PathVariable("productId") Long productId) {
         Optional<Product> optional = productService.findById(productId);
         if (optional.isPresent()) {
-            cartService.addToCart(optional.get());
+            cartService.addProductToCart(optional.get());
             return "cart/added_to_cart";
         } else {
             return "product/product_not_found";
         }
+    }
+
+    @GetMapping("/reduce/{productId}")
+    public String reduceItemQuantity(@PathVariable("productId") Long productId, Model model) {
+        cartService.reduceQuantity(productId);
+        model.addAttribute("cart", cartService.getReadOnlyCart());
+        return "cart/index";
     }
 }
