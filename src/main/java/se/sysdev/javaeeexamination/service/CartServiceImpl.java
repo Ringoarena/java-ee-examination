@@ -7,6 +7,7 @@ import se.sysdev.javaeeexamination.model.Product;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +25,11 @@ public class CartServiceImpl implements CartService {
         }
         System.out.println("Item added to cart...");
         System.out.println(cart.toString());
+    }
+
+    @Override
+    public List<CartItem> getReadOnlyCart() {
+        return Collections.unmodifiableList(cart);
     }
 
     private boolean cartContains(Product product) {

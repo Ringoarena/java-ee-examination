@@ -5,7 +5,20 @@
     <title>Webshop</title>
 </head>
 <body>
-<h1>Cart Item List</h1>
+<h1>Shopping Cart</h1>
+<table>
+    <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Action</th>
+    </tr>
+    <tr th:each="item : ${cart}">
+        <td th:text="${item.getProduct().name}"></td>
+        <td th:text="${item.getProduct().price}"></td>
+        <td th:text="${item.getQuantity()}"></td>
+    </tr>
+</table>
 
 </body>
 </html>
