@@ -27,7 +27,9 @@ public class ProductController {
     }
 
     @GetMapping("/create/{productName}/{productPrice}")
-    public String createProduct(@PathVariable("productName") String name, @PathVariable("productPrice") Long price, Model model) {
+    public String createProduct(@PathVariable("productName") String name,
+                                @PathVariable("productPrice") Long price,
+                                Model model) {
         productService.createProduct(new ProductDto(name, price));
         model.addAttribute("products", productService.findAll());
         return "product/index";
