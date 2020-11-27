@@ -1,4 +1,4 @@
-package se.sysdev.javaeeexamination.controller;
+package se.sysdev.javaeeexamination.webcontroller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +21,7 @@ public class ProductController {
     @GetMapping
     public String showProductList(Model model) {
         model.addAttribute("products", productService.findAll());
-        model.addAttribute("ciCount", cartService.getCartItemCount());
+        model.addAttribute("itemCount", cartService.getCartItemCount());
         return "product/index";
     }
 

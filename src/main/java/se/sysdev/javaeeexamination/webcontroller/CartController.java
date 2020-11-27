@@ -1,4 +1,4 @@
-package se.sysdev.javaeeexamination.controller;
+package se.sysdev.javaeeexamination.webcontroller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
