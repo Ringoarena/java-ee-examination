@@ -31,12 +31,11 @@ public class CartController {
     public String addToCart(@PathVariable("productId") Long productId, Model model) {
         Optional<Product> optional = productService.findById(productId);
         if (optional.isPresent()) {
-            cartService.addProductToCart(optional.get());
+            cartService.addToCart(optional.get());
             model.addAttribute("addedProduct", optional.get());
             return "cart/added_to_cart";
-        } else {
-            return "product/product_not_found";
         }
+        return "product/product_not_found";
     }
 
     @GetMapping("/reduce/{productId}")

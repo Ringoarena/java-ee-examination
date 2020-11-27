@@ -16,11 +16,11 @@ public class CartServiceImpl implements CartService {
     List<CartItem> cart = new ArrayList<>();
 
     @Override
-    public void addProductToCart(Product product) {
+    public void addToCart(Product product) {
         if (cartContainsProduct(product)) {
             incrementQuantity(product);
         } else {
-            addToCart(product);
+            doAddToCart(product);
         }
     }
 
@@ -70,21 +70,7 @@ public class CartServiceImpl implements CartService {
         }
     }
 
-    private void addToCart(Product product) {
+    private void doAddToCart(Product product) {
         cart.add(new CartItem(product, 1));
     }
-
-//    @Override
-//    public void addToCart(Product product) {
-//        Optional<CartItem> optional = cart.stream()
-//                .filter(ci -> ci.getProduct().getId().equals(product.getId()))
-//                .findAny();
-//        if (optional.isPresent()) {
-//            CartItem item = optional.get();
-//            item.setQuantity(item.getQuantity() + 1);
-//        } else {
-//            cart.add(new CartItem(product, 1));
-//        }
-//    }
-
 }

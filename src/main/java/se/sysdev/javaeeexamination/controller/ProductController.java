@@ -13,14 +13,13 @@ import se.sysdev.javaeeexamination.service.ProductService;
 @Controller
 @RequestMapping("/products")
 public class ProductController {
-
     @Autowired
     private ProductService productService;
     @Autowired
     private CartService cartService;
 
     @GetMapping
-    public String productList(Model model) {
+    public String showProductList(Model model) {
         model.addAttribute("products", productService.findAll());
         model.addAttribute("ciCount", cartService.getCartItemCount());
         return "product/index";
