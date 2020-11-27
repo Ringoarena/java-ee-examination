@@ -1,4 +1,4 @@
-package se.sysdev.javaeeexamination.controller.dto;
+package se.sysdev.javaeeexamination.dto;
 
 public class ProductDto {
     private String name;

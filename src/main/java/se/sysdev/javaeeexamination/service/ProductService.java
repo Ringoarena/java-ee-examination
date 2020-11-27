@@ -1,6 +1,6 @@
 package se.sysdev.javaeeexamination.service;
 
-import se.sysdev.javaeeexamination.controller.dto.ProductDto;
+import se.sysdev.javaeeexamination.dto.ProductDto;
 import se.sysdev.javaeeexamination.model.Product;
 
 import java.util.List;
