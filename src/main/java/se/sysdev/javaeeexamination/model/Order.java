@@ -11,7 +11,7 @@ public class Order {
     @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     private List<OrderLine> orderLines;
     @ManyToOne
-    private Customer customer;
+    private User user;
     private boolean processed;
 
     public Long getId() {
@@ -30,12 +30,12 @@ public class Order {
         this.orderLines = orderLines;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public User getCustomer() {
+        return user;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomer(User user) {
+        this.user = user;
     }
 
     public boolean isProcessed() {
