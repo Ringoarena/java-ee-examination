@@ -3,18 +3,31 @@ package se.sysdev.javaeeexamination.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class OrderLine {
     @Id
     @GeneratedValue
     private Long id;
+    @ManyToOne
     private Product product;
     private int quantity;
+
+    public OrderLine() {
+    }
 
     public OrderLine(Product product, int quantity) {
         this.product = product;
         this.quantity = quantity;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Product getProduct() {
