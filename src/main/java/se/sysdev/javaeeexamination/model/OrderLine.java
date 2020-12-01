@@ -1,7 +1,14 @@
 package se.sysdev.javaeeexamination.model;
 
-public class OrderLine {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
+@Entity
+public class OrderLine {
+    @Id
+    @GeneratedValue
+    private Long id;
     private Product product;
     private int quantity;
 
