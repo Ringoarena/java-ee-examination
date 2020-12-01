@@ -2,7 +2,7 @@ package se.sysdev.javaeeexamination.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
-import se.sysdev.javaeeexamination.model.CartItem;
+import se.sysdev.javaeeexamination.model.OrderLine;
 import se.sysdev.javaeeexamination.model.Product;
 
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import java.util.Optional;
 @Service
 @SessionScope
 public class CartServiceImpl implements CartService {
-    List<CartItem> cart = new ArrayList<>();
+    List<OrderLine> cart = new ArrayList<>();
 
     @Override
     public void addToCart(Product product) {
@@ -25,7 +25,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public List<CartItem> getReadOnlyCart() {
+    public List<OrderLine> getReadOnlyCart() {
         return Collections.unmodifiableList(cart);
     }
 
@@ -38,22 +38,22 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public int getCartItemCount() {
-        return cart.stream().mapToInt(CartItem::getQuantity).sum();
+        return cart.stream().mapToInt(OrderLine::getQuantity).sum();
     }
 
     private boolean cartContainsProduct(Product product) {
-        return cart.stream().anyMatch(cartItem -> cartItem.getProduct().getId().equals(product.getId()));
+        return cart.stream().anyMatch(orderLine -> orderLine.getProduct().getId().equals(product.getId()));
     }
 
     private boolean cartContainsProductById(Long productId) {
-        return cart.stream().anyMatch(cartItem -> cartItem.getProduct().getId().equals(productId));
+        return cart.stream().anyMatch(orderLine -> orderLine.getProduct().getId().equals(productId));
     }
 
     private void decrementQuantity(Long productId) {
-        Optional<CartItem> optional = cart.stream()
-                .filter(cartItem -> cartItem.getProduct().getId().equals(productId)).findFirst();
+        Optional<OrderLine> optional = cart.stream()
+                .filter(orderLine -> orderLine.getProduct().getId().equals(productId)).findFirst();
         if (optional.isPresent()) {
-            CartItem item = optional.get();
+            OrderLine item = optional.get();
             item.setQuantity(item.getQuantity() - 1);
             if (item.getQuantity() == 0) {
                 cart.remove(item);
@@ -62,15 +62,15 @@ public class CartServiceImpl implements CartService {
     }
 
     private void incrementQuantity(Product product) {
-        Optional<CartItem> optional = cart.stream()
-                .filter(cartItem -> cartItem.getProduct().getId().equals(product.getId())).findFirst();
+        Optional<OrderLine> optional = cart.stream()
+                .filter(orderLine -> orderLine.getProduct().getId().equals(product.getId())).findFirst();
         if (optional.isPresent()) {
-            CartItem item = optional.get();
+            OrderLine item = optional.get();
             item.setQuantity(item.getQuantity() + 1);
         }
     }
 
     private void doAddToCart(Product product) {
-        cart.add(new CartItem(product, 1));
+        cart.add(new OrderLine(product, 1));
     }
 }

@@ -1,11 +1,11 @@
 package se.sysdev.javaeeexamination.model;
 
-public class CartItem {
+public class OrderLine {
 
     private Product product;
     private int quantity;
 
-    public CartItem(Product product, int quantity) {
+    public OrderLine(Product product, int quantity) {
         this.product = product;
         this.quantity = quantity;
     }
