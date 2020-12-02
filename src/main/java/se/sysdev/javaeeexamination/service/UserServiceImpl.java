@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import se.sysdev.javaeeexamination.dto.UserDto;
 import se.sysdev.javaeeexamination.model.Address;
@@ -22,6 +23,8 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     @Autowired
     private RoleRepository roleRepository;
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public Optional<User> registerUser(UserDto userDto) {
@@ -33,7 +36,7 @@ public class UserServiceImpl implements UserService {
             roles.add(roleRepository.save(new Role("ROLE_USER")));
         }
         User user = new User(userDto.getName()
-                , userDto.getPassword()
+                , passwordEncoder.encode(userDto.getPassword())
                 , userDto.getEmail()
                 , Arrays.asList(new Address(userDto.getCity(), userDto.getStreet()))
                 , roles);
