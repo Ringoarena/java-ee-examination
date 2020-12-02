@@ -15,8 +15,8 @@ import java.util.Optional;
 @SessionScope
 public class CartServiceImpl implements CartService {
     @Autowired
-    OrderService orderService;
-    List<OrderLine> orderLines = new ArrayList<>();
+    private OrderService orderService;
+    private List<OrderLine> orderLines = new ArrayList<>();
 
     @Override
     public void addToCart(Product product) {
