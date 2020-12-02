@@ -17,9 +17,17 @@
         <td th:text="${item.getProduct().getName()}"></td>
         <td th:text="${item.getProduct().getPrice()}"></td>
         <td th:text="${item.getQuantity()}"></td>
-        <td><a th:href="@{/cart/reduce/{id}(id=${item.getProduct().getId()})}">Reduce quantity</a></td>
+        <td>
+            <p>
+                <a th:href="@{/cart/increase/{id}(id=${item.getProduct().getId()})}">Increase quantity</a>
+            </p>
+            <p>
+                <a th:href="@{/cart/reduce/{id}(id=${item.getProduct().getId()})}">Reduce quantity</a>
+            </p>
+        </td>
     </tr>
 </table>
+<p><a th:href="@{/cart/submit}">Submit order</a></p>
 <p>Back to <a th:href="@{/products}">products</a></p>
 </body>
 </html>

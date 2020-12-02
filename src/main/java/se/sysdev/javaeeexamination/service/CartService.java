@@ -9,6 +9,10 @@ public interface CartService {
 
     void addToCart(Product product);
 
+    void submitOrder();
+
+    void increaseQuantity(Long productId);
+
     void reduceQuantity(Long productId);
 
     List<OrderLine> getReadOnlyCart();

@@ -1,5 +1,7 @@
 package se.sysdev.javaeeexamination.model;
 
+import se.sysdev.javaeeexamination.dto.UserDto;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -24,6 +26,13 @@ public class User {
         this.password = password;
         this.email = email;
         this.roles = roles;
+    }
+
+    public User(UserDto userDto) {
+        this.name = userDto.getName();
+        this.password = userDto.getPassword();
+        this.email = userDto.getEmail();
+        this.roles = userDto.getRoles();
     }
 
     public Long getId() {

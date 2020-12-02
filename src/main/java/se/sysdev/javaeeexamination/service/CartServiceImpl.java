@@ -1,5 +1,6 @@
 package se.sysdev.javaeeexamination.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 import se.sysdev.javaeeexamination.model.OrderLine;
@@ -13,20 +14,35 @@ import java.util.Optional;
 @Service
 @SessionScope
 public class CartServiceImpl implements CartService {
-    List<OrderLine> cart = new ArrayList<>();
+    @Autowired
+    OrderService orderService;
+    List<OrderLine> orderLines = new ArrayList<>();
 
     @Override
     public void addToCart(Product product) {
         if (cartContainsProduct(product)) {
-            incrementQuantity(product);
+            incrementQuantity(product.getId());
         } else {
             doAddToCart(product);
         }
     }
 
     @Override
+    public void submitOrder() {
+        orderService.submitOrder(orderLines);
+        orderLines = new ArrayList<>();
+    }
+
+    @Override
     public List<OrderLine> getReadOnlyCart() {
-        return Collections.unmodifiableList(cart);
+        return Collections.unmodifiableList(orderLines);
+    }
+
+    @Override
+    public void increaseQuantity(Long productId) {
+        if (cartContainsProductById(productId)) {
+            incrementQuantity(productId);
+        }
     }
 
     @Override
@@ -38,32 +54,32 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public int getCartItemCount() {
-        return cart.stream().mapToInt(OrderLine::getQuantity).sum();
+        return orderLines.stream().mapToInt(OrderLine::getQuantity).sum();
     }
 
     private boolean cartContainsProduct(Product product) {
-        return cart.stream().anyMatch(orderLine -> orderLine.getProduct().getId().equals(product.getId()));
+        return orderLines.stream().anyMatch(orderLine -> orderLine.getProduct().getId().equals(product.getId()));
     }
 
     private boolean cartContainsProductById(Long productId) {
-        return cart.stream().anyMatch(orderLine -> orderLine.getProduct().getId().equals(productId));
+        return orderLines.stream().anyMatch(orderLine -> orderLine.getProduct().getId().equals(productId));
     }
 
     private void decrementQuantity(Long productId) {
-        Optional<OrderLine> optional = cart.stream()
+        Optional<OrderLine> optional = orderLines.stream()
                 .filter(orderLine -> orderLine.getProduct().getId().equals(productId)).findFirst();
         if (optional.isPresent()) {
             OrderLine item = optional.get();
             item.setQuantity(item.getQuantity() - 1);
             if (item.getQuantity() == 0) {
-                cart.remove(item);
+                orderLines.remove(item);
             }
         }
     }
 
-    private void incrementQuantity(Product product) {
-        Optional<OrderLine> optional = cart.stream()
-                .filter(orderLine -> orderLine.getProduct().getId().equals(product.getId())).findFirst();
+    private void incrementQuantity(Long productId) {
+        Optional<OrderLine> optional = orderLines.stream()
+                .filter(orderLine -> orderLine.getProduct().getId().equals(productId)).findFirst();
         if (optional.isPresent()) {
             OrderLine item = optional.get();
             item.setQuantity(item.getQuantity() + 1);
@@ -71,6 +87,6 @@ public class CartServiceImpl implements CartService {
     }
 
     private void doAddToCart(Product product) {
-        cart.add(new OrderLine(product, 1));
+        orderLines.add(new OrderLine(product, 1));
     }
 }
