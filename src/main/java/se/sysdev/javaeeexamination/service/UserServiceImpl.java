@@ -1,6 +1,8 @@
 package se.sysdev.javaeeexamination.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import se.sysdev.javaeeexamination.dto.UserDto;
 import se.sysdev.javaeeexamination.model.Address;
@@ -45,5 +47,10 @@ public class UserServiceImpl implements UserService {
             return Optional.empty();
         }
         return Optional.of(user);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        return null;
     }
 }

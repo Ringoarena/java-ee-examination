@@ -40,7 +40,6 @@ public class JavaEeExaminationApplication {
             orderLines.add(new OrderLine(p1, 2));
             orderLines.add(new OrderLine(p2, 1));
             Order o1 = orderRepository.save(new Order(orderLines, u1, new Address("Stockholm", "Zinkens Väg"), false));
-
         };
     }
 
