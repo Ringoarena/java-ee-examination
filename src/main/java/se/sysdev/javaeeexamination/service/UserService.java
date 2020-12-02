@@ -7,5 +7,5 @@ import se.sysdev.javaeeexamination.model.User;
 import java.util.Optional;
 
 public interface UserService extends UserDetailsService {
-    Optional<User> createUser(UserDto userDto);
+    Optional<User> registerUser(UserDto userDto);
 }

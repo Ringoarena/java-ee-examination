@@ -1,6 +1,8 @@
 package se.sysdev.javaeeexamination.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -11,10 +13,8 @@ import se.sysdev.javaeeexamination.model.User;
 import se.sysdev.javaeeexamination.repository.RoleRepository;
 import se.sysdev.javaeeexamination.repository.UserRepository;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -24,16 +24,13 @@ public class UserServiceImpl implements UserService {
     private RoleRepository roleRepository;
 
     @Override
-    public Optional<User> createUser(UserDto userDto) {
+    public Optional<User> registerUser(UserDto userDto) {
         List<Role> roles = new ArrayList<>();
         Optional<Role> optional = roleRepository.findByName("ROLE_USER");
         if (optional.isPresent()) {
-            System.out.println("Found role_user.");
             roles.add(optional.get());
         } else {
-            System.out.println("Couldn't find role_user, creating it...");
             roles.add(roleRepository.save(new Role("ROLE_USER")));
-
         }
         User user = new User(userDto.getName()
                 , userDto.getPassword()
@@ -50,7 +47,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return null;
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Optional<User> optional = userRepository.findByEmail(email);
+        if (!optional.isPresent()) {
+            throw new UsernameNotFoundException("User email " + email + " not found.");
+        }
+        User user = optional.get();
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
+    }
+
+    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
+        return roles.stream().map(r -> new SimpleGrantedAuthority(r.getName())).collect(Collectors.toList());
     }
 }

@@ -38,7 +38,7 @@ public class UserController {
 
     @PostMapping("/registration")
     public String handleUserRegistration(@ModelAttribute("userdto") UserDto userDto) {
-        Optional<User> optional = userService.createUser(userDto);
+        Optional<User> optional = userService.registerUser(userDto);
         if (optional.isPresent()) {
             return "redirect:/user/registration?success";
         }
