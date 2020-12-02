@@ -32,13 +32,6 @@ public class User {
         this.roles = roles;
     }
 
-    public User(UserDto userDto) {
-        this.name = userDto.getName();
-        this.password = userDto.getPassword();
-        this.email = userDto.getEmail();
-        this.roles = userDto.getRoles();
-    }
-
     public Long getId() {
         return id;
     }

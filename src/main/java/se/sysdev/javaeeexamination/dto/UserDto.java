@@ -1,20 +1,20 @@
 package se.sysdev.javaeeexamination.dto;
 
-import se.sysdev.javaeeexamination.model.Role;
+import se.sysdev.javaeeexamination.model.Address;
 
-import java.util.Collection;
+import java.util.List;
 
 public class UserDto {
     private String name;
     private String password;
     private String email;
-    private Collection<Role> roles;
+    private List<Address> addresses;
 
-    public UserDto(String name, String password, String email, Collection<Role> roles) {
+    public UserDto(String name, String password, String email, List<Address> addresses) {
         this.name = name;
         this.password = password;
         this.email = email;
-        this.roles = roles;
+        this.addresses = addresses;
     }
 
     public String getName() {
@@ -41,11 +41,11 @@ public class UserDto {
         this.email = email;
     }
 
-    public Collection<Role> getRoles() {
-        return roles;
+    public List<Address> getAddresses() {
+        return addresses;
     }
 
-    public void setRoles(Collection<Role> roles) {
-        this.roles = roles;
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
     }
 }
