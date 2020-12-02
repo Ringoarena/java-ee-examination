@@ -7,13 +7,25 @@ import java.util.List;
 @Table(name = "orders")
 public class Order {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<OrderLine> orderLines;
+
     @ManyToOne
     private User user;
+
     private boolean processed;
+
+    public Order() {
+    }
+
+    public Order(List<OrderLine> orderLines, User user, boolean processed) {
+        this.orderLines = orderLines;
+        this.user = user;
+        this.processed = processed;
+    }
 
     public Long getId() {
         return id;

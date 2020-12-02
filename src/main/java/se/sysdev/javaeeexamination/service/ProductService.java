@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface ProductService {
 
-    void createProduct(ProductDto dto);
+    Product createProduct(ProductDto dto);
 
     List<Product> findAll();
 

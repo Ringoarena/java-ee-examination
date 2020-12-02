@@ -1,19 +1,30 @@
 package se.sysdev.javaeeexamination.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String password;
+    @Column(unique = true)
     private String email;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    private Collection<Role> roles;
+
+    public User() {
+    }
+
+    public User(String name, String password, String email, Collection<Role> roles) {
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.roles = roles;
+    }
 
     public Long getId() {
         return id;

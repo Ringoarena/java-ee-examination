@@ -11,13 +11,12 @@ import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-
     @Autowired
     private ProductRepository productRepository;
 
     @Override
-    public void createProduct(ProductDto dto) {
-        productRepository.save(new Product(dto.getName(), dto.getPrice()));
+    public Product createProduct(ProductDto dto) {
+        return productRepository.save(new Product(dto.getName(), dto.getPrice(), dto.getCategory()));
     }
 
     @Override

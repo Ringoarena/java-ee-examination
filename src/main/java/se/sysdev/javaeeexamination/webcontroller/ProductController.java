@@ -24,13 +24,13 @@ public class ProductController {
         model.addAttribute("itemCount", cartService.getCartItemCount());
         return "product/index";
     }
-
-    @GetMapping("/create/{productName}/{productPrice}")
-    public String createProduct(@PathVariable("productName") String name,
-                                @PathVariable("productPrice") Long price,
-                                Model model) {
-        productService.createProduct(new ProductDto(name, price));
-        model.addAttribute("products", productService.findAll());
-        return "product/index";
-    }
+//
+//    @GetMapping("/create/{productName}/{productPrice}")
+//    public String createProduct(@PathVariable("productName") String name,
+//                                @PathVariable("productPrice") Long price,
+//                                Model model) {
+//        productService.createProduct(new ProductDto(name, price));
+//        model.addAttribute("products", productService.findAll());
+//        return "product/index";
+//    }
 }

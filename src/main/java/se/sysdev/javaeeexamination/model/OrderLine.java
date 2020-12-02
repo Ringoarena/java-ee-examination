@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name = "orderlines")
 public class OrderLine {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     private Product product;
@@ -46,7 +46,7 @@ public class OrderLine {
 
     @Override
     public String toString() {
-        return "CartItem{" +
+        return "OrderLine{" +
                 "product=" + product +
                 ", quantity=" + quantity +
                 '}';
