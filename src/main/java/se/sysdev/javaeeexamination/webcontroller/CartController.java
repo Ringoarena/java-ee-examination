@@ -21,7 +21,7 @@ public class CartController {
     CartService cartService;
 
     @GetMapping
-    public String showCart(Model model) {
+    public String showCartIndex(Model model) {
         model.addAttribute("cart", cartService.getReadOnlyCart());
         return "cart/index";
     }

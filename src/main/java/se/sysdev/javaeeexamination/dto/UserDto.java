@@ -2,19 +2,17 @@ package se.sysdev.javaeeexamination.dto;
 
 import se.sysdev.javaeeexamination.model.Address;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDto {
     private String name;
     private String password;
     private String email;
-    private List<Address> addresses;
+    private String city;
+    private String street;
 
-    public UserDto(String name, String password, String email, List<Address> addresses) {
-        this.name = name;
-        this.password = password;
-        this.email = email;
-        this.addresses = addresses;
+    public UserDto() {
     }
 
     public String getName() {
@@ -41,11 +39,19 @@ public class UserDto {
         this.email = email;
     }
 
-    public List<Address> getAddresses() {
-        return addresses;
+    public String getCity() {
+        return city;
     }
 
-    public void setAddresses(List<Address> addresses) {
-        this.addresses = addresses;
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
     }
 }

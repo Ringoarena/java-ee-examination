@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import se.sysdev.javaeeexamination.dto.ProductDto;
 import se.sysdev.javaeeexamination.service.CartService;
 import se.sysdev.javaeeexamination.service.ProductService;
 
@@ -19,18 +18,9 @@ public class ProductController {
     private CartService cartService;
 
     @GetMapping
-    public String showProductList(Model model) {
+    public String showProductIndex(Model model) {
         model.addAttribute("products", productService.findAll());
         model.addAttribute("itemCount", cartService.getCartItemCount());
         return "product/index";
     }
-//
-//    @GetMapping("/create/{productName}/{productPrice}")
-//    public String createProduct(@PathVariable("productName") String name,
-//                                @PathVariable("productPrice") Long price,
-//                                Model model) {
-//        productService.createProduct(new ProductDto(name, price));
-//        model.addAttribute("products", productService.findAll());
-//        return "product/index";
-//    }
 }

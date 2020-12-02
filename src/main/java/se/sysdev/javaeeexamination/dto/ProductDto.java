@@ -7,10 +7,7 @@ public class ProductDto {
     private Long price;
     private Category category;
 
-    public ProductDto(String name, Long price, Category category) {
-        this.name = name;
-        this.price = price;
-        this.category = category;
+    public ProductDto() {
     }
 
     public String getName() {

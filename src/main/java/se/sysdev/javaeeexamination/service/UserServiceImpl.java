@@ -3,12 +3,14 @@ package se.sysdev.javaeeexamination.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.sysdev.javaeeexamination.dto.UserDto;
+import se.sysdev.javaeeexamination.model.Address;
 import se.sysdev.javaeeexamination.model.Role;
 import se.sysdev.javaeeexamination.model.User;
 import se.sysdev.javaeeexamination.repository.RoleRepository;
 import se.sysdev.javaeeexamination.repository.UserRepository;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,7 +33,11 @@ public class UserServiceImpl implements UserService {
             roles.add(roleRepository.save(new Role("ROLE_USER")));
 
         }
-        User user = new User(userDto.getName(), userDto.getPassword(), userDto.getEmail(), userDto.getAddresses(), roles);
+        User user = new User(userDto.getName()
+                , userDto.getPassword()
+                , userDto.getEmail()
+                , Arrays.asList(new Address(userDto.getCity(), userDto.getStreet()))
+                , roles);
         try {
             userRepository.save(user);
         } catch (Exception e) {
