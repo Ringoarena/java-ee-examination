@@ -4,6 +4,7 @@ import se.sysdev.javaeeexamination.dto.UserDto;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -15,16 +16,19 @@ public class User {
     private String password;
     @Column(unique = true)
     private String email;
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    private List<Address> addresses;
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Collection<Role> roles;
 
     public User() {
     }
 
-    public User(String name, String password, String email, Collection<Role> roles) {
+    public User(String name, String password, String email, List<Address> addresses, Collection<Role> roles) {
         this.name = name;
         this.password = password;
         this.email = email;
+        this.addresses = addresses;
         this.roles = roles;
     }
 
@@ -65,5 +69,21 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
+    }
+
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
     }
 }

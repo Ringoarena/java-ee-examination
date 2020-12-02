@@ -15,6 +15,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void submitOrder(List<OrderLine> orderLines) {
-        orderRepository.save(new Order(orderLines, null, false));
+        orderRepository.save(new Order(orderLines, null, null, false));
     }
 }

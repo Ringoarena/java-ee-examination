@@ -9,21 +9,21 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<OrderLine> orderLines;
-
     @ManyToOne
     private User user;
-
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private Address address;
     private boolean processed;
 
     public Order() {
     }
 
-    public Order(List<OrderLine> orderLines, User user, boolean processed) {
+    public Order(List<OrderLine> orderLines, User user, Address address, boolean processed) {
         this.orderLines = orderLines;
         this.user = user;
+        this.address = address;
         this.processed = processed;
     }
 

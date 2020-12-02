@@ -35,11 +35,11 @@ public class JavaEeExaminationApplication {
             Category bikes = categoryRepository.save(new Category("Bikes"));
             Product p1 = productRepository.save(new Product("Pinarello", 50000L, bikes));
             Product p2 = productRepository.save(new Product("S-Works", 70000L, bikes));
-            User u1 = userRepository.save(new User("Rikard", "rikardpw", "rikard@gmail.com", null));
+            User u1 = userRepository.save(new User("Rikard", "rikardpw", "rikard@gmail.com", null, null));
             List<OrderLine> orderLines = new ArrayList<>();
             orderLines.add(new OrderLine(p1, 2));
             orderLines.add(new OrderLine(p2, 1));
-            Order o1 = orderRepository.save(new Order(orderLines, u1, false));
+            Order o1 = orderRepository.save(new Order(orderLines, u1, new Address("Stockholm", "Zinkens Väg"), false));
         };
     }
 
