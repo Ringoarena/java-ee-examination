@@ -7,7 +7,7 @@
 <body>
 <h1>User registration</h1>
 <form th:action="@{/user/registration}" th:object="${userdto}" th:method="post">
-    <input type="text" th:field="*{name}" placeholder="Enter username" required>
+    <input type="text" th:field="*{name}" placeholder="Enter name" required>
     <input type="password" th:field="*{password}" placeholder="Enter password" required>
     <input type="email" th:field="*{email}" placeholder="Enter email" required>
     <input type="text" th:field="*{city}" placeholder="Enter city" required>
@@ -16,6 +16,7 @@
 </form>
 <p th:if="${param.success}">Registration successful!</p>
 <p th:if="${param.failure}">Registration failed!</p>
+<p><a th:href="@{/user}">Back to user index</a></p>
 
 </body>
 </html>

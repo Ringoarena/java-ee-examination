@@ -27,7 +27,10 @@
         </td>
     </tr>
 </table>
-<p><a th:href="@{/cart/submit}">Submit order</a></p>
-<p>Back to <a th:href="@{/products}">products</a></p>
+<form th:action="@{/order/submit}" method="post">
+    <input type="submit" value="Submit order(POST)">
+</form>
+<p><a th:href="@{/products}">Back to products</a></p>
+<p><a th:href="@{/}">Back to home</a></p>
 </body>
 </html>

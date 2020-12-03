@@ -7,5 +7,7 @@ import se.sysdev.javaeeexamination.model.User;
 import java.util.Optional;
 
 public interface UserService extends UserDetailsService {
-    Optional<User> registerUser(UserDto userDto);
+    boolean registerUser(UserDto userDto);
+
+    Optional<User> findByEmail(String email);
 }

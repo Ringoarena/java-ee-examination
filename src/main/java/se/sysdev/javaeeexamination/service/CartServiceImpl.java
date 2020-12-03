@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 import se.sysdev.javaeeexamination.model.OrderLine;
 import se.sysdev.javaeeexamination.model.Product;
+import se.sysdev.javaeeexamination.model.User;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +16,8 @@ import java.util.Optional;
 public class CartServiceImpl implements CartService {
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private UserService userService;
     private List<OrderLine> orderLines = new ArrayList<>();
 
     @Override
@@ -25,17 +27,6 @@ public class CartServiceImpl implements CartService {
         } else {
             doAddToCart(product);
         }
-    }
-
-    @Override
-    public void submitOrder() {
-        orderService.submitOrder(orderLines);
-        orderLines = new ArrayList<>();
-    }
-
-    @Override
-    public List<OrderLine> getReadOnlyCart() {
-        return Collections.unmodifiableList(orderLines);
     }
 
     @Override
@@ -50,6 +41,11 @@ public class CartServiceImpl implements CartService {
         if (cartContainsProductById(productId)) {
             decrementQuantity(productId);
         }
+    }
+
+    @Override
+    public List<OrderLine> getOrderLines() {
+        return orderLines;
     }
 
     @Override

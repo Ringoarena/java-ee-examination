@@ -22,7 +22,7 @@ public class CartController {
 
     @GetMapping
     public String showCartIndex(Model model) {
-        model.addAttribute("cart", cartService.getReadOnlyCart());
+        model.addAttribute("cart", cartService.getOrderLines());
         return "cart/index";
     }
 
@@ -37,23 +37,17 @@ public class CartController {
         return "product/product_not_found";
     }
 
-    @GetMapping("/submit")
-    public String handleSubmitOrder() {
-        cartService.submitOrder();
-        return "redirect:/";
-    }
-
     @GetMapping("/increase/{productId}")
     public String increaseItemQuantity(@PathVariable("productId") Long productId, Model model) {
         cartService.increaseQuantity(productId);
-        model.addAttribute("cart", cartService.getReadOnlyCart());
+        model.addAttribute("cart", cartService.getOrderLines());
         return "cart/index";
     }
 
     @GetMapping("/reduce/{productId}")
     public String reduceItemQuantity(@PathVariable("productId") Long productId, Model model) {
         cartService.reduceQuantity(productId);
-        model.addAttribute("cart", cartService.getReadOnlyCart());
+        model.addAttribute("cart", cartService.getOrderLines());
         return "cart/index";
     }
 }

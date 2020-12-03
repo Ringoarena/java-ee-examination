@@ -8,10 +8,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import se.sysdev.javaeeexamination.dto.UserDto;
-import se.sysdev.javaeeexamination.model.User;
 import se.sysdev.javaeeexamination.service.UserService;
 
-import java.util.Optional;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/user")
@@ -35,11 +34,17 @@ public class UserController {
         return "user/registration";
     }
 
+    @GetMapping("/details")
+    public String showUserDetails(Principal principal, Model model) {
+        model.addAttribute("activeuser", principal);
+        return "user/details";
+    }
+
 
     @PostMapping("/registration")
     public String handleUserRegistration(@ModelAttribute("userdto") UserDto userDto) {
-        Optional<User> optional = userService.registerUser(userDto);
-        if (optional.isPresent()) {
+        boolean success = userService.registerUser(userDto);
+        if (success) {
             return "redirect:/user/registration?success";
         }
         return "redirect:/user/registration?failure";

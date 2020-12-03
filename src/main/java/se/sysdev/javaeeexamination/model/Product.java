@@ -10,7 +10,7 @@ public class Product {
     private Long id;
     private String name;
     private double price;
-    @ManyToOne
+    @ManyToOne()
     private Category category;
 
     public Product() {
