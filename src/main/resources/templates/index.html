@@ -1,17 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Webshop</title>
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
-</head>
+<head th:replace="fragments/main::html_head"></head>
 <body>
-<nav>
-    <ul>
-        <li><a th:href="@{/}">Home</a></li>
-        <li><a th:href="@{/user}">User</a></li>
-    </ul>
-</nav>
+<div th:replace="fragments/main::navigation"></div>
 <h1>Welcome!</h1>
 <p><a th:href="@{/login}">Login</a></p>
 <p><a th:href="@{/logout}">Logout</a></p>

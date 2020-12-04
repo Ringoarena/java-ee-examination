@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="html_head">
+    <meta charset="UTF-8">
+    <title>Webshop frag:html_head</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<nav th:fragment="navigation" class="nav">
+    <ul>
+        <li><a th:href="@{/}">Home</a></li>
+        <li><a th:href="@{/user}">User</a></li>
+        <li><a th:href="@{/user/details}">User details</a></li>
+    </ul>
+</nav>
+
+</body>
+</html>
