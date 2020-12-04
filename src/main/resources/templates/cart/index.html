@@ -1,36 +1,35 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html layout:decorate="~{layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
 <body>
-<h1>Shopping Cart</h1>
-<table>
-    <tr>
-        <th>Product</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th>Action</th>
-    </tr>
-    <tr th:each="item : ${cart}">
-        <td th:text="${item.getProduct().getName()}"></td>
-        <td th:text="${item.getProduct().getPrice()}"></td>
-        <td th:text="${item.getQuantity()}"></td>
-        <td>
-            <p>
-                <a th:href="@{/cart/increase/{id}(id=${item.getProduct().getId()})}">Increase quantity</a>
-            </p>
-            <p>
-                <a th:href="@{/cart/reduce/{id}(id=${item.getProduct().getId()})}">Reduce quantity</a>
-            </p>
-        </td>
-    </tr>
-</table>
-<form th:action="@{/order/submit}" method="post">
-    <input type="submit" value="Submit order(POST)">
-</form>
-<p><a th:href="@{/products}">Back to products</a></p>
-<p><a th:href="@{/}">Back to home</a></p>
+<main layout:fragment="content">
+    <h1>Shopping Cart</h1>
+    <table>
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Action</th>
+        </tr>
+        <tr th:each="item : ${cart}">
+            <td th:text="${item.getProduct().getName()}"></td>
+            <td th:text="${item.getProduct().getPrice()}"></td>
+            <td th:text="${item.getQuantity()}"></td>
+            <td>
+                <p>
+                    <a th:href="@{/cart/increase/{id}(id=${item.getProduct().getId()})}">Increase quantity</a>
+                </p>
+                <p>
+                    <a th:href="@{/cart/reduce/{id}(id=${item.getProduct().getId()})}">Reduce quantity</a>
+                </p>
+            </td>
+        </tr>
+    </table>
+    <form th:action="@{/order/submit}" method="post">
+        <input type="submit" value="Submit order(POST)">
+    </form>
+    <p><a th:href="@{/products}">Back to products</a></p>
+    <p><a th:href="@{/}">Back to home</a></p>
+</main>
 </body>
 </html>

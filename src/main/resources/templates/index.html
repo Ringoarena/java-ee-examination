@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/main::html_head"></head>
+<html layout:decorate="~{layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:th="http://www.thymeleaf.org">
 <body>
-<div th:replace="fragments/main::navigation"></div>
-<h1>Welcome!</h1>
-<p><a th:href="@{/login}">Login</a></p>
-<p><a th:href="@{/logout}">Logout</a></p>
-<p>Please browse our goods in the <a th:href="@{/products}">products</a> section.</p>
-<p>View your shopping <a th:href="@{/cart}">cart</a></p>
-<p>Go to the <a th:href="@{/user}">user</a> section</p>
-<p>Go to the <a th:href="@{/admin}">admin</a> section</p>
+<main layout:fragment="content">
+    <h1>Welcome!</h1>
+    <p><a th:href="@{/login}">Login</a></p>
+    <p><a th:href="@{/logout}">Logout</a></p>
+    <p>Please browse our goods in the <a th:href="@{/products}">products</a> section.</p>
+    <p>View your shopping <a th:href="@{/cart}">cart</a></p>
+    <p>Go to the <a th:href="@{/user}">user</a> section</p>
+    <p>Go to the <a th:href="@{/admin}">admin</a> section</p>
+</main>
 </body>
 </html>

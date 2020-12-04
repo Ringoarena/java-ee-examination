@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html layout:decorate="~{layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
 <body>
-<h1>User details</h1>
-<p>Your email is: <span th:text="${activeuser.name}"></span></p>
-<p><a th:href="@{/user}">Back to user index</a></p>
-
+<main layout:fragment="content">
+    <h1>User details</h1>
+    <p>Your email is: <span th:text="${activeuser.name}"></span></p>
+    <p><a th:href="@{/user}">Back to user index</a></p>
+</main>
 </body>
 </html>

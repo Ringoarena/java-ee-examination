@@ -5,3 +5,8 @@ li {
 .example {
     color: red;
 }
+
+.footer {
+    display: flex;
+    justify-content: center;
+}

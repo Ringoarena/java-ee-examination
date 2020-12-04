@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html layout:decorate="~{layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
 <body>
-<h1>Added to cart</h1>
-<p><span th:text="${addedProduct.name}"></span> added to <a th:href="@{/cart}">cart</a></p>
+<main layout:fragment="content">
+    <h1>Added to cart</h1>
+    <p><span th:text="${addedProduct.name}"></span> added to <a th:href="@{/cart}">cart</a></p>
+</main>
 </body>
 </html>
