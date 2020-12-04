@@ -42,10 +42,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/details").hasAnyRole(UserRole.CUSTOMER.name(), UserRole.ADMIN.name())
                 .antMatchers("/").permitAll()
                 .and()
-                .formLogin().permitAll()
+                .formLogin().loginPage("/login").permitAll()
                 .and()
                 .logout()
-                .logoutSuccessUrl("/user/login?logout")
+                .logoutSuccessUrl("/login?logout")
                 .permitAll().invalidateHttpSession(true).deleteCookies("JSESSIONID");
     }
 }

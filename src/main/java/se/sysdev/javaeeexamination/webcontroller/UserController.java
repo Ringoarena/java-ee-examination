@@ -23,11 +23,6 @@ public class UserController {
         return "user/index";
     }
 
-    @GetMapping("/login")
-    public String showUserLoginForm(Model model) {
-        return "user/login";
-    }
-
     @GetMapping("/registration")
     public String showUserRegistrationForm(Model model) {
         model.addAttribute("userdto", new UserDto());
