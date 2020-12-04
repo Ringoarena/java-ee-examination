@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import se.sysdev.javaeeexamination.dto.UserDto;
 
 @Controller
 @RequestMapping("/")
@@ -15,7 +16,13 @@ public class MainController {
     }
 
     @GetMapping("/login")
-    public String showUserLoginForm(Model model) {
-        return "/login";
+    public String showUserLoginForm() {
+        return "login";
+    }
+
+    @GetMapping("/registration")
+    public String showUserRegistrationForm(Model model) {
+        model.addAttribute("userdto", new UserDto());
+        return "registration";
     }
 }

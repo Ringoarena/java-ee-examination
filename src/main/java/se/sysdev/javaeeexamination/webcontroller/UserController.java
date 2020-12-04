@@ -23,18 +23,11 @@ public class UserController {
         return "user/index";
     }
 
-    @GetMapping("/registration")
-    public String showUserRegistrationForm(Model model) {
-        model.addAttribute("userdto", new UserDto());
-        return "user/registration";
-    }
-
     @GetMapping("/details")
     public String showUserDetails(Principal principal, Model model) {
         model.addAttribute("activeuser", principal);
         return "user/details";
     }
-
 
     @PostMapping("/registration")
     public String handleUserRegistration(@ModelAttribute("userdto") UserDto userDto) {
