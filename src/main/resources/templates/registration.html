@@ -10,11 +10,10 @@
         <input type="email" th:field="*{email}" placeholder="Enter email" required>
         <input type="text" th:field="*{city}" placeholder="Enter city" required>
         <input type="text" th:field="*{street}" placeholder="Enter street" required>
-        <input type="submit" value="Submit">
+        <input class="btn red accent-2" type="submit" value="Submit">
     </form>
     <p th:if="${param.success}">Registration successful!</p>
     <p th:if="${param.failure}">Registration failed!</p>
-    <p><a th:href="@{/}">Back to home</a></p>
 </main>
 </body>
 </html>

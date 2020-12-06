@@ -7,11 +7,10 @@
     <form th:action="@{/login}" method="post">
         <input type="text" name="username" placeholder="Enter email" required>
         <input type="password" name="password" placeholder="Enter password" required>
-        <input type="submit" name="login-submit" value="Submit">
+        <input class="btn red accent-2" type="submit" name="login-submit" value="Submit">
     </form>
     <p>New user? Register <a th:href="@{/registration}">here</a></p></p>
     <p th:if="${param.logout}">Logout successful!</p>
-    <p><a th:href="@{/}">Back to home</a></p>
 </main>
 </body>
 </html>
