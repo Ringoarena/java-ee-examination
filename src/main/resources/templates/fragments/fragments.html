@@ -1,20 +1,44 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="html_head">
     <meta charset="UTF-8">
     <title>Webshop frag:html_head</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/materialize.min.css}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-<nav th:fragment="navigation" class="nav">
-    <ul>
+<header th:fragment="header">
+    <nav class="nav-wrapper">
+        <div class="container">
+            <a th:href="@{/}" class="brand-logo">Webshop</a>
+            <a href="#" class="sidenav-trigger" data-target="mobile-links"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                <li><a th:href="@{/}">Home</a></li>
+                <li><a th:href="@{/products}">Products</a></li>
+                <li><a th:href="@{/cart}">Cart</a></li>
+                <li><a th:href="@{/login}">Login</a></li>
+                <li><a th:href="@{/logout}">Logout</a></li>
+                <li><a th:href="@{/user}">User</a></li>
+                <li><a th:href="@{/admin}">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+    <ul class="sidenav" id="mobile-links">
         <li><a th:href="@{/}">Home</a></li>
+        <li><a th:href="@{/products}">Products</a></li>
+        <li><a th:href="@{/cart}">Cart</a></li>
+        <li><a th:href="@{/login}">Login</a></li>
+        <li><a th:href="@{/logout}">Logout</a></li>
         <li><a th:href="@{/user}">User</a></li>
-        <li><a th:href="@{/user/details}">User details</a></li>
+        <li><a th:href="@{/admin}">Admin</a></li>
     </ul>
-</nav>
+</header>
 <footer th:fragment="footer" class="footer">
     <p>Made by Rikard Virta 2020</p>
+    <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/materialize.min.js}"></script>
+    <script th:src="@{/js/script.js}"></script>
 </footer>
 
 </body>
