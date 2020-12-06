@@ -20,7 +20,6 @@ public class ProductController {
     @GetMapping
     public String showProductIndex(Model model) {
         model.addAttribute("products", productService.findAll());
-        model.addAttribute("itemCount", cartService.getCartItemCount());
         return "product/index";
     }
 }

@@ -4,6 +4,7 @@
 <body>
 <main layout:fragment="content">
     <h1>Product list</h1>
+    <h5 class="red-text" th:text="${message}"></h5>
     <div class="row">
         <div class="col s12 l4" th:each="product : ${products}">
             <div class="card">

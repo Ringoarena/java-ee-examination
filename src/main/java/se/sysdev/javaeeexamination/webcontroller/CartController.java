@@ -6,10 +6,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import se.sysdev.javaeeexamination.model.OrderLine;
 import se.sysdev.javaeeexamination.model.Product;
 import se.sysdev.javaeeexamination.service.CartService;
 import se.sysdev.javaeeexamination.service.ProductService;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -22,8 +24,15 @@ public class CartController {
 
     @GetMapping
     public String showCartIndex(Model model) {
-        model.addAttribute("cart", cartService.getOrderLines());
-        return "cart/index";
+        List<OrderLine> orderLines = cartService.getOrderLines();
+        if (orderLines.size() > 0) {
+            model.addAttribute("orderlines", orderLines);
+            return "cart/index";
+        } else {
+            model.addAttribute("products", productService.findAll());
+            model.addAttribute("message", "Add products before viewing cart!");
+            return "product/index";
+        }
     }
 
     @GetMapping("/add/{productId}")

@@ -11,7 +11,7 @@
             <th>Quantity</th>
             <th>Action</th>
         </tr>
-        <tr th:each="item : ${cart}">
+        <tr th:each="item : ${orderlines}">
             <td th:text="${item.getProduct().getName()}"></td>
             <td th:text="${item.getProduct().getPrice()}"></td>
             <td th:text="${item.getQuantity()}"></td>
