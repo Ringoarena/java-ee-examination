@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html layout:decorate="~{layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
 <main layout:fragment="content">
     <h1>User details</h1>
-    <p>Your email is: <span th:text="${activeuser.name}"></span></p>
+    <p>Your email is: <span sec:authentication="name"></span></p>
+    <p>Your roles are: <span sec:authentication="principal.authorities"></span></p>
 </main>
 </body>
 </html>

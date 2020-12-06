@@ -12,8 +12,7 @@ import java.security.Principal;
 public class UserController {
 
     @GetMapping
-    public String showUserIndex(Principal principal, Model model) {
-        model.addAttribute("activeuser", principal);
+    public String showUserIndex() {
         return "user/index";
     }
 }
