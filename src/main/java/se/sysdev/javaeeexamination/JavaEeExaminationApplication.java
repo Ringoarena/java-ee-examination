@@ -28,9 +28,17 @@ public class JavaEeExaminationApplication {
         return (args) -> {
 //            Category bikes = categoryRepository.save(new Category("Bikes"));
 //            Category clothes = categoryRepository.save(new Category("Clothes"));
-//            Product p1 = productRepository.save(new Product("Pinarello", 50000L, bikes));
-//            Product p2 = productRepository.save(new Product("S-Works", 70000L, bikes));
-//            Product p3 = productRepository.save(new Product("Rapha", 1700L, clothes));
+//
+//            productRepository.save(new Product("Cento10NDR", "A bike made for flat stages", "cento10ndr.jpg", 4700L, bikes));
+//            productRepository.save(new Product("Cento10SL", "A bike made for mountain stages", "cento10sl.jpg", 2700L, bikes));
+//            productRepository.save(new Product("RadioShack", "RadioShack Nissan Trek 2014 jersey", "radioshackjersey.jpg", 150L, clothes));
+//
+//
+//            productRepository.save(new Product("Cento10NDR", "A bike made for flat stages", "cento10ndr.jpg", 4700L, bikes));
+//            productRepository.save(new Product("Cento10SL", "A bike made for mountain stages", "cento10sl.jpg", 2700L, bikes));
+//            productRepository.save(new Product("RadioShack", "RadioShack Nissan Trek 2014 jersey", "radioshackjersey.jpg", 150L, clothes));
+//
+
         };
     }
 

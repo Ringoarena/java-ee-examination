@@ -4,22 +4,41 @@
 <body>
 <main layout:fragment="content">
     <h1>Product list</h1>
-    <table>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Action</th>
-        </tr>
-        <tr th:each="product : ${products}">
-            <td th:text="${product.id}"></td>
-            <td th:text="${product.name}"></td>
-            <td th:text="${product.price}"></td>
-            <td><a th:href="@{/cart/add/{id}(id=${product.id})}">Add to cart</a></td>
-        </tr>
-    </table>
-    <p>Items in <a th:href="@{/cart}">cart</a>: <span th:text="${itemCount}"></span></p>
-    <p><a th:href="@{/}">Back to home</a></p>
+    <div class="row">
+        <div class="col s12 l4" th:each="product : ${products}">
+            <div class="card">
+                <div class="card-image">
+                    <img th:src="@{/images/{image}(image=${product.imgName})}" alt="Cento 10 Drag Reduction">
+                </div>
+                <div class="card-content">
+                    <span class="card-title" th:text="${product.name}"></span>
+                    <p th:text="${product.description}"></p>
+                    <p><span th:text="${product.price}"></span> €</p>
+                    <p th:text="${product.category.name}"></p>
+                </div>
+                <div class="card-action">
+                    <a th:href="@{/cart/add/{id}(id=${product.id})}">Add to cart</a>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 l6">
+
+        </div>
+    </div>
+<!--    <table>-->
+<!--        <tr>-->
+<!--            <th>Id</th>-->
+<!--            <th>Name</th>-->
+<!--            <th>Price</th>-->
+<!--            <th>Action</th>-->
+<!--        </tr>-->
+<!--        <tr th:each="product : ${products}">-->
+<!--            <td th:text="${product.id}"></td>-->
+<!--            <td th:text="${product.name}"></td>-->
+<!--            <td th:text="${product.price}"></td>-->
+<!--            <td><a th:href="@{/cart/add/{id}(id=${product.id})}">Add to cart</a></td>-->
+<!--        </tr>-->
+<!--    </table>-->
 </main>
 </body>
 </html>

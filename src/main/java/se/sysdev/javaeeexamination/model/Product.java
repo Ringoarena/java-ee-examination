@@ -9,6 +9,8 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private String description;
+    private String imgName;
     private double price;
     @ManyToOne()
     private Category category;
@@ -18,6 +20,14 @@ public class Product {
 
     public Product(String name, double price, Category category) {
         this.name = name;
+        this.price = price;
+        this.category = category;
+    }
+
+    public Product(String name, String description, String imgName, double price, Category category) {
+        this.name = name;
+        this.description = description;
+        this.imgName = imgName;
         this.price = price;
         this.category = category;
     }
@@ -44,6 +54,30 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImgName() {
+        return imgName;
+    }
+
+    public void setImgName(String imgname) {
+        this.imgName = imgname;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @Override
