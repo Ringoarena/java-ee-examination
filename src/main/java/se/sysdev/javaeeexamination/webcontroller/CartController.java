@@ -36,27 +36,24 @@ public class CartController {
     }
 
     @GetMapping("/add/{productId}")
-    public String addToCart(@PathVariable("productId") Long productId, Model model) {
+    public String addToCart(@PathVariable("productId") Long productId) {
         Optional<Product> optional = productService.findById(productId);
         if (optional.isPresent()) {
             cartService.addToCart(optional.get());
-            model.addAttribute("addedProduct", optional.get());
-            return "cart/added_to_cart";
+            return "redirect:/products";
         }
         return "product/product_not_found";
     }
 
     @GetMapping("/increase/{productId}")
-    public String increaseItemQuantity(@PathVariable("productId") Long productId, Model model) {
+    public String increaseItemQuantity(@PathVariable("productId") Long productId) {
         cartService.increaseQuantity(productId);
-        model.addAttribute("cart", cartService.getOrderLines());
-        return "cart/index";
+        return "redirect:/cart";
     }
 
     @GetMapping("/reduce/{productId}")
-    public String reduceItemQuantity(@PathVariable("productId") Long productId, Model model) {
+    public String reduceItemQuantity(@PathVariable("productId") Long productId) {
         cartService.reduceQuantity(productId);
-        model.addAttribute("cart", cartService.getOrderLines());
-        return "cart/index";
+        return "redirect:/cart";
     }
 }
