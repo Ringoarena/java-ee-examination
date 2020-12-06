@@ -40,7 +40,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/admin").hasRole(UserRole.ADMIN.name())
-                .antMatchers("/user/details").hasAnyRole(UserRole.CUSTOMER.name(), UserRole.ADMIN.name())
+                .antMatchers("/user").hasAnyRole(UserRole.CUSTOMER.name(), UserRole.ADMIN.name())
                 .antMatchers("/order/submit").authenticated()
                 .antMatchers("/").permitAll()
                 .and()
