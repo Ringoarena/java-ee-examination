@@ -18,4 +18,6 @@ public interface CartService {
     int getCartItemCount();
 
     double getCartTotal();
+
+    void clearCart();
 }

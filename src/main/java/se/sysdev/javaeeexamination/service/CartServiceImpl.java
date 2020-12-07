@@ -61,6 +61,11 @@ public class CartServiceImpl implements CartService {
         return cartTotal;
     }
 
+    @Override
+    public void clearCart() {
+        orderLines = new ArrayList<>();
+    }
+
     private boolean cartContainsProduct(Product product) {
         return orderLines.stream().anyMatch(orderLine -> orderLine.getProduct().getId().equals(product.getId()));
     }

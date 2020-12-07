@@ -8,6 +8,7 @@ import se.sysdev.javaeeexamination.model.User;
 import se.sysdev.javaeeexamination.repository.OrderRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -15,7 +16,7 @@ public class OrderServiceImpl implements OrderService {
     private OrderRepository orderRepository;
 
     @Override
-    public void submitOrder(List<OrderLine> orderLines, User user) {
-        orderRepository.save(new Order(orderLines, user, user.getAddresses().get(0), false));
+    public Order submitOrder(List<OrderLine> orderLines, User user) {
+        return orderRepository.save(new Order(orderLines, user, user.getAddresses().get(0), false));
     }
 }

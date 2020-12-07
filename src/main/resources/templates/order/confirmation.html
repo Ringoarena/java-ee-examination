@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+<main layout:fragment="content">
+    <h1>Order confirmation</h1>
+        <h5>User details:</h5>
+        <p>Name: <span th:text="${order.getCustomer().name}"></span></p>
+        <p>Email: <span th:text="${order.getCustomer().email}"></span></p>
+        <h5>Shipping details:</h5>
+        <p>City: <span th:text="${order.getCustomer().getAddresses()[0].getCity()}"></span></p>
+        <p>Street: <span th:text="${order.getCustomer().getAddresses()[0].getStreet()}"></span></p>
+</main>
+</body>
+</html>
