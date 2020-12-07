@@ -1,7 +1,6 @@
 # java-ee-examination
 
 Features todo
-- Cart shows total price
 - After checkout user gets sent to a confirmation page showing the order
 - User can browse products per category
 - User can filter products by product name
@@ -14,6 +13,7 @@ GUI and REST
 
 Features completed
 
+- Cart shows total price
 - User can register
 - User can login
 - User can list products
