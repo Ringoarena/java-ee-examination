@@ -20,6 +20,10 @@ public class OrderLine {
         this.quantity = quantity;
     }
 
+    public double getOrderLineTotal() {
+        return product.getPrice() * quantity;
+    }
+
     public Long getId() {
         return id;
     }

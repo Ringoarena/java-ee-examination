@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 import se.sysdev.javaeeexamination.model.OrderLine;
 import se.sysdev.javaeeexamination.model.Product;
-import se.sysdev.javaeeexamination.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +50,15 @@ public class CartServiceImpl implements CartService {
     @Override
     public int getCartItemCount() {
         return orderLines.stream().mapToInt(OrderLine::getQuantity).sum();
+    }
+
+    @Override
+    public double getCartTotal() {
+        double cartTotal = 0;
+        for (OrderLine orderLine : orderLines) {
+            cartTotal += orderLine.getOrderLineTotal();
+        }
+        return cartTotal;
     }
 
     private boolean cartContainsProduct(Product product) {

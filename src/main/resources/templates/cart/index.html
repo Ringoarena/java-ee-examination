@@ -25,6 +25,7 @@
             </td>
         </tr>
     </table>
+    <h5>Grand total: <span th:text="${carttotal}"></span> €</h5>
     <form th:action="@{/order/submit}" method="post">
         <input class="btn red accent-2" type="submit" value="checkout">
     </form>

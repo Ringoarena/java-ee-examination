@@ -27,6 +27,7 @@ public class CartController {
         List<OrderLine> orderLines = cartService.getOrderLines();
         if (orderLines.size() > 0) {
             model.addAttribute("orderlines", orderLines);
+            model.addAttribute("carttotal", cartService.getCartTotal());
             return "cart/index";
         } else {
             model.addAttribute("products", productService.findAll());

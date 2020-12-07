@@ -16,4 +16,6 @@ public interface CartService {
     List<OrderLine> getOrderLines();
 
     int getCartItemCount();
+
+    double getCartTotal();
 }
