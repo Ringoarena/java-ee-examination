@@ -5,12 +5,26 @@
 <body>
 <main layout:fragment="content">
     <h1>Order confirmation</h1>
-        <h5>User details:</h5>
-        <p>Name: <span th:text="${order.getCustomer().name}"></span></p>
-        <p>Email: <span th:text="${order.getCustomer().email}"></span></p>
-        <h5>Shipping details:</h5>
-        <p>City: <span th:text="${order.getCustomer().getAddresses()[0].getCity()}"></span></p>
-        <p>Street: <span th:text="${order.getCustomer().getAddresses()[0].getStreet()}"></span></p>
+    <h5>User details:</h5>
+    <p>Name: <span th:text="${order.getCustomer().name}"></span></p>
+    <p>Email: <span th:text="${order.getCustomer().email}"></span></p>
+    <h5>Shipping details:</h5>
+    <p>City: <span th:text="${order.getCustomer().getAddresses()[0].getCity()}"></span></p>
+    <p>Street: <span th:text="${order.getCustomer().getAddresses()[0].getStreet()}"></span></p>
+    <h5>Order items:</h5>
+    <table>
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+        </tr>
+        <tr th:each="item : ${order.getOrderLines()}">
+            <td th:text="${item.getProduct().getName()}"></td>
+            <td th:text="${item.getProduct().getPrice()}"></td>
+            <td th:text="${item.getQuantity()}"></td>
+        </tr>
+    </table>
+    <h5>Grand total: <span th:text="${order.getOrderTotal()}"></span> €</h5>
 </main>
 </body>
 </html>

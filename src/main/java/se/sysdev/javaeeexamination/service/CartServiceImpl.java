@@ -13,10 +13,6 @@ import java.util.Optional;
 @Service
 @SessionScope
 public class CartServiceImpl implements CartService {
-    @Autowired
-    private OrderService orderService;
-    @Autowired
-    private UserService userService;
     private List<OrderLine> orderLines = new ArrayList<>();
 
     @Override

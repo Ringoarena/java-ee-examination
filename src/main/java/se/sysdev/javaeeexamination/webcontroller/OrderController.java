@@ -15,7 +15,6 @@ import se.sysdev.javaeeexamination.service.CartService;
 import se.sysdev.javaeeexamination.service.OrderService;
 import se.sysdev.javaeeexamination.service.UserService;
 
-import javax.swing.text.html.Option;
 import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
@@ -36,19 +35,22 @@ public class OrderController {
     }
 
     @GetMapping("/confirmation")
-    public String showOrderConfirmation(@ModelAttribute("neworder") Order order, Model model) {
-        model.addAttribute("order", order);
-        return "order/confirmation";
+    public String showOrderConfirmation(Model model) {
+        Optional<Order> optionalOrder = orderService.getSubmittedOrder();
+        if (optionalOrder.isPresent()) {
+            model.addAttribute("order", optionalOrder.get());
+            return "order/confirmation";
+        }
+        return "redirect:/products";
     }
 
     @PostMapping("/submit")
-    public String handleSubmitOrder(RedirectAttributes redirectAttributes, Principal principal) {
+    public String handleSubmitOrder(Principal principal) {
         Optional<User> optionalUser = userService.findByEmail(principal.getName());
         if (optionalUser.isPresent()) {
             List<OrderLine> orderLines = cartService.getOrderLines();
             User user = optionalUser.get();
-            Order newOrder = orderService.submitOrder(orderLines, user);
-            redirectAttributes.addFlashAttribute("neworder", newOrder);
+            orderService.submitOrder(orderLines, user);
             cartService.clearCart();
             return "redirect:/order/confirmation";
         }

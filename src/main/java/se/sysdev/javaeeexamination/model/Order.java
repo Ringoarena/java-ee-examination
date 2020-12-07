@@ -27,6 +27,14 @@ public class Order {
         this.processed = processed;
     }
 
+    public double getOrderTotal() {
+        double orderTotal = 0;
+        for (OrderLine orderLine : orderLines) {
+            orderTotal += orderLine.getOrderLineTotal();
+        }
+        return orderTotal;
+    }
+
     public Long getId() {
         return id;
     }

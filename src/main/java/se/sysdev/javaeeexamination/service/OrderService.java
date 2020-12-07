@@ -5,8 +5,11 @@ import se.sysdev.javaeeexamination.model.OrderLine;
 import se.sysdev.javaeeexamination.model.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface OrderService {
-    Order submitOrder(List<OrderLine> orderLines, User user);
+    void submitOrder(List<OrderLine> orderLines, User user);
+
+    Optional<Order> getSubmittedOrder();
 
 }
