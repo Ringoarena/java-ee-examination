@@ -4,12 +4,12 @@
 <body>
 <main layout:fragment="content">
     <h1>User login</h1>
-    <form th:action="@{/login}" method="post">
+    <form th:action="@{/auth/login}" method="post">
         <input type="text" name="username" placeholder="Enter email" required>
         <input type="password" name="password" placeholder="Enter password" required>
         <input class="btn red accent-2" type="submit" name="login-submit" value="Submit">
     </form>
-    <p>New user? Register <a th:href="@{/registration}">here</a></p></p>
+    <p>New user? Register <a th:href="@{/auth/registration}">here</a></p></p>
     <p th:if="${param.logout}">Logout successful!</p>
 </main>
 </body>

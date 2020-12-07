@@ -44,11 +44,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/order/submit").authenticated()
                 .antMatchers("/").permitAll()
                 .and()
-                .formLogin().loginPage("/login").permitAll()
+                .formLogin().loginPage("/auth/login").permitAll()
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login?logout")
+                .logoutSuccessUrl("/auth/login?logout")
                 .permitAll();
     }
 }

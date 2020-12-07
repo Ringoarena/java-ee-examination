@@ -4,7 +4,7 @@
 <body>
 <main layout:fragment="content">
     <h1>User registration</h1>
-    <form th:action="@{/registration}" th:object="${userdto}" th:method="post">
+    <form th:action="@{/auth/registration}" th:object="${userdto}" th:method="post">
         <input type="text" th:field="*{name}" placeholder="Enter name" required>
         <input type="password" th:field="*{password}" placeholder="Enter password" required>
         <input type="email" th:field="*{email}" placeholder="Enter email" required>
