@@ -1,7 +1,6 @@
 # java-ee-examination
 
 Features todo
-- After checkout user gets sent to a confirmation page showing the order
 - User can browse products per category
 - User can filter products by product name
 - A basic testing suite exists for implemented key components (cart)
@@ -12,7 +11,7 @@ GUI and REST
 - Admin can add new products
 
 Features completed
-
+- After checkout user gets sent to a confirmation page showing the order
 - Cart shows total price
 - User can register
 - User can login
