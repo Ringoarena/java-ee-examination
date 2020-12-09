@@ -4,9 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import se.sysdev.javaeeexamination.service.CartService;
+import org.springframework.web.bind.annotation.RequestParam;
 import se.sysdev.javaeeexamination.service.ProductService;
 
 @Controller
@@ -14,12 +13,11 @@ import se.sysdev.javaeeexamination.service.ProductService;
 public class ProductController {
     @Autowired
     private ProductService productService;
-    @Autowired
-    private CartService cartService;
 
     @GetMapping
-    public String showProductIndex(Model model) {
-        model.addAttribute("products", productService.findAll());
+    public String showProductIndex(Model model, @RequestParam(name = "keyword", required = false, defaultValue = "") String keyword) {
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("products", productService.findByKeyword(keyword));
         return "product/index";
     }
 }
