@@ -6,8 +6,15 @@
     <h1>Product list</h1>
     <div class="row">
         <form th:action="@{/products}" th:method="get">
-            <label for="searchbox">Filter:</label>
+            <label for="searchbox">Filter</label>
             <input type="text" th:value="${keyword}" id="searchbox" name="keyword"/>
+            <div class="input-field">
+                <select class="select-category" name="categoryIndex">
+                    <option th:value="-1">All products</option>
+                    <option th:each="cat, iStat : ${categories}" th:value="${iStat.index}" th:text="${cat.name}"></option>
+                </select>
+                <label>Category</label>
+            </div>
             <input type="submit" class="btn red accent-2" value="Search" />
             <input type="button" class="btn red accent-2" value="Clear" onclick="clearFilter()">
         </form>
