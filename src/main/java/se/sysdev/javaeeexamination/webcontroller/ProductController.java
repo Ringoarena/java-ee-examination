@@ -28,6 +28,7 @@ public class ProductController {
 
         List<Category> categoryList = categoryService.findAll();
         model.addAttribute("keyword", keyword);
+        model.addAttribute("catIndex", categoryIndex);
         model.addAttribute("categories", categoryList);
         if (categoryIndex == -1) {
             model.addAttribute("products", productService.findByKeyword(keyword));

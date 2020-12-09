@@ -11,7 +11,7 @@
             <div class="input-field">
                 <select class="select-category" name="categoryIndex">
                     <option th:value="-1">All products</option>
-                    <option th:each="cat, iStat : ${categories}" th:value="${iStat.index}" th:text="${cat.name}"></option>
+                    <option th:each="cat, iStat : ${categories}" th:selected="${catIndex == iStat.index}" th:value="${iStat.index}" th:text="${cat.name}"></option>
                 </select>
                 <label>Category</label>
             </div>
