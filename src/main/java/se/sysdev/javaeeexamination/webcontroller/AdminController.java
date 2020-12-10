@@ -18,8 +18,8 @@ public class AdminController {
         return "admin/index";
     }
 
-    @PostMapping("/processed/{orderId}")
-    public String toggleOrderIsProcessed(@PathVariable("orderId") String orderId) {
+    @GetMapping("/processed/{orderId}")
+    public String altToggleOrderIsProcessed(@PathVariable("orderId") String orderId) {
         orderService.toggleOrderIsProcessed(Long.valueOf(orderId));
         return "redirect:/admin";
     }

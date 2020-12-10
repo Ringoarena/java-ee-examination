@@ -14,20 +14,18 @@
                 <th>Customer</th>
                 <th>Order total</th>
                 <th>Processed</th>
-                <th>Action</th>
             </tr>
             <tr th:each="order : ${orders}">
                 <td th:text="${order.getId()}"></td>
                 <td th:text="${order.getUser().name}"></td>
                 <td th:text="${order.getOrderTotal()}"></td>
                 <td>
-                    <i th:if="${order.isProcessed()}" class="material-icons">check_box</i>
-                    <i th:unless="${order.isProcessed()}" class="material-icons">check_box_outline_blank</i>
-                </td>
-                <td>
-                    <form th:action="@{/admin/processed/{orderId}(orderId=${order.getId()})}" th:method="post">
-                        <input type="submit" class="btn-small red accent-2" value="Toggle processed">
-                    </form>
+                    <a th:if="${order.isProcessed()}" th:href="@{/admin/processed/{orderId}(orderId=${order.getId()})}">
+                        <i class="material-icons red-text">check_box</i>
+                    </a>
+                    <a th:unless="${order.isProcessed()}" th:href="@{/admin/processed/{orderId}(orderId=${order.getId()})}">
+                        <i class="material-icons red-text">check_box_outline_blank</i>
+                    </a>
                 </td>
             </tr>
         </table>
