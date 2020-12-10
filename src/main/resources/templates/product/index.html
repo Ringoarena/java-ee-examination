@@ -16,7 +16,7 @@
                 <label>Category</label>
             </div>
             <input type="submit" class="btn red accent-2" value="Search" />
-            <input type="button" class="btn red accent-2" value="Clear" onclick="clearFilter()">
+            <a class="btn red accent-2" th:href="@{/products}">Clear</a>
         </form>
     </div>
     <h5 class="red-text" th:text="${message}"></h5>
