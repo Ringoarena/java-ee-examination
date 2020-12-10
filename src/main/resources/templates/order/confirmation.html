@@ -6,11 +6,11 @@
 <main layout:fragment="content">
     <h1>Order confirmation</h1>
     <h5>User details:</h5>
-    <p>Name: <span th:text="${order.getCustomer().name}"></span></p>
-    <p>Email: <span th:text="${order.getCustomer().email}"></span></p>
+    <p>Name: <span th:text="${order.getUser().name}"></span></p>
+    <p>Email: <span th:text="${order.getUser().email}"></span></p>
     <h5>Shipping details:</h5>
-    <p>City: <span th:text="${order.getCustomer().getAddresses()[0].getCity()}"></span></p>
-    <p>Street: <span th:text="${order.getCustomer().getAddresses()[0].getStreet()}"></span></p>
+    <p>City: <span th:text="${order.getUser().getAddresses()[0].getCity()}"></span></p>
+    <p>Street: <span th:text="${order.getUser().getAddresses()[0].getStreet()}"></span></p>
     <h5>Order items:</h5>
     <table>
         <tr>
