@@ -25,6 +25,21 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public List<Order> getOrders() {
+        return orderRepository.findAll();
+    }
+
+    @Override
+    public void toggleOrderIsProcessed(Long orderId) {
+        Optional<Order> optionalOrder = orderRepository.findById(orderId);
+        if (optionalOrder.isPresent()) {
+            Order order = optionalOrder.get();
+            order.setProcessed(!order.isProcessed());
+            orderRepository.save(order);
+        }
+    }
+
+    @Override
     public Optional<Order> getSubmittedOrder() {
         return submittedOrder;
     }

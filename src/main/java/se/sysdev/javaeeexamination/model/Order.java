@@ -51,11 +51,11 @@ public class Order {
         this.orderLines = orderLines;
     }
 
-    public User getCustomer() {
+    public User getUser() {
         return user;
     }
 
-    public void setCustomer(User user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

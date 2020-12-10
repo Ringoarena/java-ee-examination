@@ -10,6 +10,10 @@ import java.util.Optional;
 public interface OrderService {
     void submitOrder(List<OrderLine> orderLines, User user);
 
-    Optional<Order> getSubmittedOrder();
 
+    List<Order> getOrders();
+
+    void toggleOrderIsProcessed(Long orderId);
+
+    Optional<Order> getSubmittedOrder();
 }
