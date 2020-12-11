@@ -7,28 +7,55 @@
         <h1>Admin Control Panel</h1>
     </div>
     <div class="row">
-        <h4>Orders</h4>
-        <table>
-            <tr>
-                <th>Id</th>
-                <th>Customer</th>
-                <th>Order total</th>
-                <th>Processed</th>
-            </tr>
-            <tr th:each="order : ${orders}">
-                <td th:text="${order.getId()}"></td>
-                <td th:text="${order.getUser().name}"></td>
-                <td th:text="${order.getOrderTotal()}"></td>
-                <td>
-                    <a th:if="${order.isProcessed()}" th:href="@{/admin/processed/{orderId}(orderId=${order.getId()})}">
-                        <i class="material-icons red-text">check_box</i>
-                    </a>
-                    <a th:unless="${order.isProcessed()}" th:href="@{/admin/processed/{orderId}(orderId=${order.getId()})}">
-                        <i class="material-icons red-text">check_box_outline_blank</i>
-                    </a>
-                </td>
-            </tr>
-        </table>
+        <div class="col s12 l6">
+            <h4>Orders</h4>
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Customer</th>
+                    <th>Order total</th>
+                    <th>Processed</th>
+                </tr>
+                <tr th:each="order : ${orders}">
+                    <td th:text="${order.getId()}"></td>
+                    <td th:text="${order.getUser().name}"></td>
+                    <td th:text="${order.getOrderTotal()}"></td>
+                    <td>
+                        <a th:if="${order.isProcessed()}"
+                           th:href="@{/admin/processed/{orderId}(orderId=${order.getId()})}">
+                            <i class="material-icons red-text">check_box</i>
+                        </a>
+                        <a th:unless="${order.isProcessed()}"
+                           th:href="@{/admin/processed/{orderId}(orderId=${order.getId()})}">
+                            <i class="material-icons red-text">check_box_outline_blank</i>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col s12 l6">
+            <ul class="tabs">
+                <li class="tab col s6">
+                    <a href="#product-tab-content"><h6 class="black-text">New product</h6></a>
+                </li>
+                <li class="tab col s6">
+                    <a href="#category-tab-content"><h6 class="black-text">New category</h6></a>
+                </li>
+            </ul>
+            <div id="product-tab-content" class="col s12">
+                <p>Name:</p>
+                <p>Desc:</p>
+                <p>Price:</p>
+            </div>
+            <div id="category-tab-content" class="col s12">
+                <form>
+                    <div class="input-field">
+                        <input type="text" id="category-name" class=""/>
+                        <label for="category-name">Name</label>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </main>
 </body>
