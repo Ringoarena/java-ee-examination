@@ -4,3 +4,8 @@
 /*    background-position: center;*/
 /*    min-height: 400px;*/
 /*}*/
+
+.inline-list > li {
+    display: inline;
+    margin-right: 2rem;
+}

@@ -3,4 +3,5 @@ $(document).ready(function () {
     $('.select-category').formSelect();
     $('.materialboxed').materialbox();
     $('.tabs').tabs();
+    $('.tooltipped').tooltip();
 })

@@ -3,6 +3,7 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 >
+
 <head th:fragment="html_head">
     <meta charset="UTF-8">
     <title>Webshop</title>
@@ -10,6 +11,7 @@
     <link rel="stylesheet" th:href="@{/css/materialize.min.css}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
+
 <body>
 <header th:fragment="header">
     <nav class="nav-wrapper">
@@ -17,28 +19,76 @@
             <a th:href="@{/}" class="brand-logo">Webshop</a>
             <a href="#" class="sidenav-trigger" data-target="mobile-links"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
-                <li><a th:href="@{/}">Home</a></li>
-                <li><a th:href="@{/products}">Products</a></li>
-                <li><a th:href="@{/cart}">Cart</a></li>
-                <li sec:authorize="!isAuthenticated()"><a th:href="@{/auth/login}">Login</a></li>
+                <li th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active':''}"><a
+                        th:href="@{/}">Home</a></li>
+                <li th:classappend="${#httpServletRequest.getRequestURI() == '/products' ? 'active':''}"><a
+                        th:href="@{/products}">Products</a></li>
+                <li th:classappend="${#httpServletRequest.getRequestURI() == '/cart' ? 'active':''}"><a
+                        th:href="@{/cart}">Cart</a></li>
+                <li th:classappend="${#httpServletRequest.getRequestURI() == '/auth/login' ? 'active':''}"
+                    sec:authorize="!isAuthenticated()"><a th:href="@{/auth/login}">Login</a></li>
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
-                <li sec:authorize="isAuthenticated()"><a th:href="@{/user}">User</a></li>
-                <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/admin}">Admin</a></li>
+                <li th:classappend="${#httpServletRequest.getRequestURI() == '/user' ? 'active':''}"
+                    sec:authorize="isAuthenticated()"><a th:href="@{/user}">User</a></li>
+                <li th:classappend="${#httpServletRequest.getRequestURI() == '/admin' ? 'active':''}"
+                    sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/admin}">Admin</a></li>
             </ul>
         </div>
     </nav>
     <ul class="sidenav" id="mobile-links">
-        <li><a th:href="@{/}">Home</a></li>
-        <li><a th:href="@{/products}">Products</a></li>
-        <li><a th:href="@{/cart}">Cart</a></li>
-        <li sec:authorize="!isAuthenticated()"><a th:href="@{/auth/login}">Login</a></li>
+        <li th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active':''}"><a th:href="@{/}">Home</a></li>
+        <li th:classappend="${#httpServletRequest.getRequestURI() == '/products' ? 'active':''}"><a
+                th:href="@{/products}">Products</a></li>
+        <li th:classappend="${#httpServletRequest.getRequestURI() == '/cart' ? 'active':''}"><a
+                th:href="@{/cart}">Cart</a></li>
+        <li th:classappend="${#httpServletRequest.getRequestURI() == '/auth/login' ? 'active':''}"
+            sec:authorize="!isAuthenticated()"><a th:href="@{/auth/login}">Login</a></li>
         <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
-        <li sec:authorize="isAuthenticated()"><a th:href="@{/user}">User</a></li>
-        <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/admin}">Admin</a></li>
+        <li th:classappend="${#httpServletRequest.getRequestURI() == '/user' ? 'active':''}"
+            sec:authorize="isAuthenticated()"><a th:href="@{/user}">User</a></li>
+        <li th:classappend="${#httpServletRequest.getRequestURI() == '/admin' ? 'active':''}"
+            sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/admin}">Admin</a></li>
     </ul>
 </header>
-<footer th:fragment="footer" class="container">
-    <p class="center">Made by Rikard Virta 2020</p>
+
+<footer th:fragment="footer" class="page-footer pin-bottom grey darken-1">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 l6">
+                <h5>About Me</h5>
+                <p>My name is Rikard Virta. I'm a software development student from Stockholm.</p>
+                <p>This web application is a school project.</p>
+            </div>
+            <div class="col s12 l4 offset-l2">
+                <h5>Links</h5>
+
+                <ul class="inline-list">
+                    <li>
+                        <a class="tooltipped" data-tooltip="Get in touch" href="mailto:rikard.virta90@gmail.com">
+                            <i class="material-icons white-text">mail</i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="tooltipped" data-tooltip="View source code"
+                           href="https://github.com/Ringoarena/java-ee-examination"
+                           target="_blank">
+                            <i class="material-icons white-text">code</i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="tooltipped" data-tooltip="Follow me on Strava"
+                           href="https://www.strava.com/athletes/7981493"
+                           target="_blank">
+                            <i class="material-icons white-text">directions_bike</i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright grey darken-3">
+        <div class="container center-align">&copy; 2020 Rikard Virta</div>
+    </div>
     <script th:src="@{/js/jquery.js}"></script>
     <script th:src="@{/js/materialize.min.js}"></script>
     <script th:src="@{/js/script.js}"></script>
