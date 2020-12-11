@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
-<main layout:fragment="content">
+<div layout:fragment="content" class="container">
     <h1>Order confirmation</h1>
     <h5>User details:</h5>
     <p>Name: <span th:text="${order.getUser().name}"></span></p>
@@ -25,6 +25,6 @@
         </tr>
     </table>
     <h5>Grand total: <span th:text="${order.getOrderTotal()}"></span> €</h5>
-</main>
+</div>
 </body>
 </html>

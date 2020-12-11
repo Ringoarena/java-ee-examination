@@ -2,7 +2,7 @@
 <html layout:decorate="~{layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org">
 <body>
-<main layout:fragment="content">
+<div layout:fragment="content" class="container">
     <h1>Shopping Cart</h1>
     <table>
         <tr>
@@ -29,6 +29,6 @@
     <form th:action="@{/order/submit}" method="post">
         <input class="btn red accent-2" type="submit" value="checkout">
     </form>
-</main>
+</div>
 </body>
 </html>

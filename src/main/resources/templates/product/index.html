@@ -2,7 +2,7 @@
 <html layout:decorate="~{layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org">
 <body>
-<main layout:fragment="content">
+<div layout:fragment="content" class="container">
     <h1>Product list</h1>
     <div class="row">
         <form th:action="@{/products}" th:method="get">
@@ -41,6 +41,6 @@
             </div>
         </div>
     </div>
-</main>
+</div>
 </body>
 </html>

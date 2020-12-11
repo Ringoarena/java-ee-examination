@@ -3,10 +3,10 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
-<main layout:fragment="content">
+<div layout:fragment="content" class="container">
     <h1>User details</h1>
     <p>Your email is: <span sec:authentication="name"></span></p>
     <p>Your roles are: <span sec:authentication="principal.authorities"></span></p>
-</main>
+</div>
 </body>
 </html>
