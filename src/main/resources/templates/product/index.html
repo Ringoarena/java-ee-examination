@@ -11,11 +11,12 @@
             <div class="input-field">
                 <select class="select-category" name="categoryIndex">
                     <option th:value="-1">All products</option>
-                    <option th:each="cat, iStat : ${categories}" th:selected="${catIndex == iStat.index}" th:value="${iStat.index}" th:text="${cat.name}"></option>
+                    <option th:each="cat, iStat : ${categories}" th:selected="${catIndex == iStat.index}"
+                            th:value="${iStat.index}" th:text="${cat.name}"></option>
                 </select>
                 <label>Category</label>
             </div>
-            <input type="submit" class="btn red accent-2" value="Search" />
+            <input type="submit" class="btn red accent-2" value="Search"/>
             <a class="btn red accent-2" th:href="@{/products}">Clear</a>
         </form>
     </div>
@@ -24,7 +25,8 @@
         <div class="col s12 l4 hoverable" th:each="product : ${products}">
             <div class="card">
                 <div class="card-image">
-                    <img th:src="@{/images/{image}(image=${product.imgName})}" class="materialboxed" alt="Cento 10 Drag Reduction">
+                    <img th:src="@{/images/{image}(image=${product.imgName})}" class="materialboxed"
+                         alt="Cento 10 Drag Reduction">
                 </div>
                 <div class="card-content">
                     <span class="card-title" th:text="${product.name}"></span>
@@ -33,7 +35,8 @@
                     <p th:text="${product.category.name}"></p>
                 </div>
                 <div class="card-action">
-                    <a th:href="@{/cart/add/{id}(id=${product.id})}">Add to cart</a>
+                    <a th:href="@{/cart/add/{id}(id=${product.id})}" class="tooltipped" data-tooltip="Add to cart"><i
+                            class="material-icons red-text">add_shopping_cart</i></a>
                 </div>
             </div>
         </div>
