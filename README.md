@@ -8,9 +8,11 @@ GUI
  REST
 - Admin can list all orders
 - Admin can change "processed" to "true"
+- Admin can create new category
 - Admin can add new products
 
 Features completed
+- Admin can create new category
 - Admin can list all orders
 - Admin can change "processed" to "true"
 - User can filter products per category

@@ -48,11 +48,12 @@
                 <p>Price:</p>
             </div>
             <div id="category-tab-content" class="col s12">
-                <form>
+                <form th:action="@{/admin/category}" th:object="${categorydto}" th:method="post">
                     <div class="input-field">
-                        <input type="text" id="category-name" class=""/>
+                        <input type="text" th:field="*{name}" id="category-name" />
                         <label for="category-name">Name</label>
                     </div>
+                    <input type="submit" class="btn red accent-2" value="Submit" />
                 </form>
             </div>
         </div>
