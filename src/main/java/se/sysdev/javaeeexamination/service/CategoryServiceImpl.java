@@ -2,7 +2,7 @@ package se.sysdev.javaeeexamination.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import se.sysdev.javaeeexamination.formdata.CategoryDto;
+import se.sysdev.javaeeexamination.formdata.CategoryFormData;
 import se.sysdev.javaeeexamination.model.Category;
 import se.sysdev.javaeeexamination.repository.CategoryRepository;
 
@@ -15,8 +15,8 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryRepository categoryRepository;
 
     @Override
-    public void createCategory(CategoryDto categoryDto) {
-        Category category = new Category(categoryDto.getName());
+    public void createCategory(CategoryFormData categoryFormData) {
+        Category category = new Category(categoryFormData.getName());
         categoryRepository.save(category);
     }
 

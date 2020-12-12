@@ -1,9 +1,9 @@
 package se.sysdev.javaeeexamination.formdata;
 
-public class CategoryDto {
+public class CategoryFormData {
     private String name;
 
-    public CategoryDto() {
+    public CategoryFormData() {
     }
 
     public String getName() {

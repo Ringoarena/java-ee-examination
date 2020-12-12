@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import se.sysdev.javaeeexamination.formdata.CategoryDto;
+import se.sysdev.javaeeexamination.formdata.CategoryFormData;
 import se.sysdev.javaeeexamination.formdata.ProductDto;
 import se.sysdev.javaeeexamination.formdata.ProductFormData;
 import se.sysdev.javaeeexamination.model.Category;
@@ -28,7 +28,7 @@ public class AdminController {
     public String showAdminIndex(Model model) {
         model.addAttribute("orders", orderService.getOrders());
         model.addAttribute("categories", categoryService.findAll());
-        model.addAttribute("categorydto", new CategoryDto());
+        model.addAttribute("categorydto", new CategoryFormData());
         model.addAttribute("productform", new ProductFormData());
         return "admin/index";
     }
@@ -40,8 +40,8 @@ public class AdminController {
     }
 
     @PostMapping("/category")
-    public String submitNewCategory(@ModelAttribute("categorydto") CategoryDto categoryDto) {
-        categoryService.createCategory(categoryDto);
+    public String submitNewCategory(@ModelAttribute("categorydto") CategoryFormData categoryFormData) {
+        categoryService.createCategory(categoryFormData);
         return "redirect:/admin";
     }
 
