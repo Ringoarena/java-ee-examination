@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import se.sysdev.javaeeexamination.formdata.CategoryDto;
 import se.sysdev.javaeeexamination.formdata.ProductDto;
-import se.sysdev.javaeeexamination.formdata.ProductForm;
+import se.sysdev.javaeeexamination.formdata.ProductFormData;
 import se.sysdev.javaeeexamination.model.Category;
 import se.sysdev.javaeeexamination.service.CategoryService;
 import se.sysdev.javaeeexamination.service.OrderService;
@@ -29,7 +29,7 @@ public class AdminController {
         model.addAttribute("orders", orderService.getOrders());
         model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("categorydto", new CategoryDto());
-        model.addAttribute("productform", new ProductForm());
+        model.addAttribute("productform", new ProductFormData());
         return "admin/index";
     }
 
@@ -46,7 +46,7 @@ public class AdminController {
     }
 
     @PostMapping("/product")
-    public String submitNewProduct(@ModelAttribute("productdto") ProductForm form) {
+    public String submitNewProduct(@ModelAttribute("productdto") ProductFormData form) {
         Optional<Category> optionalCategory = categoryService.findById(form.getCategoryId());
         if (!optionalCategory.isPresent()) {
             return "index";

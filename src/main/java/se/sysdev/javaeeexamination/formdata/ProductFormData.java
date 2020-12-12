@@ -1,6 +1,6 @@
 package se.sysdev.javaeeexamination.formdata;
 
-public class ProductForm {
+public class ProductFormData {
     private String name;
     private String description;
     private String imgName;
