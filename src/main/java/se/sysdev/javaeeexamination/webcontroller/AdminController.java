@@ -46,10 +46,12 @@ public class AdminController {
     }
 
     @PostMapping("/product")
-    public String submitNewProduct(@ModelAttribute("productdto") ProductFormData form) {
+    public String submitNewProduct(@ModelAttribute("productdto") ProductFormData form, Model model) {
         Optional<Category> optionalCategory = categoryService.findById(form.getCategoryId());
         if (!optionalCategory.isPresent()) {
-            return "index";
+            String message = String.format("Category with id %d not found", form.getCategoryId());
+            model.addAttribute("message", message);
+            return "error_page";
         }
         ProductDto productDto = new ProductDto(form.getName()
                 , form.getDescription()

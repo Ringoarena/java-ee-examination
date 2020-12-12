@@ -37,13 +37,15 @@ public class CartController {
     }
 
     @GetMapping("/add/{productId}")
-    public String addToCart(@PathVariable("productId") Long productId) {
+    public String addToCart(@PathVariable("productId") Long productId, Model model) {
         Optional<Product> optional = productService.findById(productId);
         if (optional.isPresent()) {
             cartService.addToCart(optional.get());
             return "redirect:/products";
         }
-        return "product/product_not_found";
+        String message = String.format("Product with id %d not found", productId);
+        model.addAttribute("message", message);
+        return "error_page";
     }
 
     @GetMapping("/increase/{productId}")
