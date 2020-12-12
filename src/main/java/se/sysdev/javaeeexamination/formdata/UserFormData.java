@@ -1,13 +1,13 @@
-package se.sysdev.javaeeexamination.dto;
+package se.sysdev.javaeeexamination.formdata;
 
-public class UserDto {
+public class UserFormData {
     private String name;
     private String password;
     private String email;
     private String city;
     private String street;
 
-    public UserDto() {
+    public UserFormData() {
     }
 
     public String getName() {

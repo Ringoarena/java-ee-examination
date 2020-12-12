@@ -1,4 +1,4 @@
-package se.sysdev.javaeeexamination.dto;
+package se.sysdev.javaeeexamination.formdata;
 
 public class ProductForm {
     private String name;

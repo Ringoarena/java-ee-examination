@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import se.sysdev.javaeeexamination.dto.UserDto;
+import se.sysdev.javaeeexamination.formdata.UserFormData;
 import se.sysdev.javaeeexamination.service.UserService;
 
 @Controller
@@ -23,13 +23,13 @@ public class AuthController {
 
     @GetMapping("/registration")
     public String showUserRegistrationForm(Model model) {
-        model.addAttribute("userdto", new UserDto());
+        model.addAttribute("userdto", new UserFormData());
         return "auth/registration";
     }
 
     @PostMapping("/registration")
-    public String handleUserRegistration(@ModelAttribute("userdto") UserDto userDto) {
-        boolean success = userService.registerUser(userDto);
+    public String handleUserRegistration(@ModelAttribute("userdto") UserFormData userFormData) {
+        boolean success = userService.registerUser(userFormData);
         if (success) {
             return "redirect:/auth/registration?success";
         }

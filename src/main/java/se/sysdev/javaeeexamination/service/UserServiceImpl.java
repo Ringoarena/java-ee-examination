@@ -5,7 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import se.sysdev.javaeeexamination.dto.UserDto;
+import se.sysdev.javaeeexamination.formdata.UserFormData;
 import se.sysdev.javaeeexamination.model.Address;
 import se.sysdev.javaeeexamination.model.User;
 import se.sysdev.javaeeexamination.repository.UserRepository;
@@ -23,11 +23,11 @@ public class UserServiceImpl implements UserService {
     private BCryptPasswordEncoder passwordEncoder;
 
     @Override
-    public boolean registerUser(UserDto userDto) {
-        User user = new User(userDto.getName()
-                , passwordEncoder.encode(userDto.getPassword())
-                , userDto.getEmail()
-                , Arrays.asList(new Address(userDto.getCity(), userDto.getStreet()))
+    public boolean registerUser(UserFormData userFormData) {
+        User user = new User(userFormData.getName()
+                , passwordEncoder.encode(userFormData.getPassword())
+                , userFormData.getEmail()
+                , Arrays.asList(new Address(userFormData.getCity(), userFormData.getStreet()))
                 , UserRole.CUSTOMER);
         try {
             userRepository.save(user);

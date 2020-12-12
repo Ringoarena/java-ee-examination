@@ -1,6 +1,6 @@
 package se.sysdev.javaeeexamination.service;
 
-import se.sysdev.javaeeexamination.dto.CategoryDto;
+import se.sysdev.javaeeexamination.formdata.CategoryDto;
 import se.sysdev.javaeeexamination.model.Category;
 
 import java.util.List;
