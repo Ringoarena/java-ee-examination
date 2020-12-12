@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import se.sysdev.javaeeexamination.formdata.CategoryFormData;
-import se.sysdev.javaeeexamination.formdata.ProductDto;
+import se.sysdev.javaeeexamination.dto.ProductDto;
 import se.sysdev.javaeeexamination.formdata.ProductFormData;
 import se.sysdev.javaeeexamination.model.Category;
 import se.sysdev.javaeeexamination.service.CategoryService;

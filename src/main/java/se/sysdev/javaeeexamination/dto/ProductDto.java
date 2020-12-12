@@ -1,4 +1,4 @@
-package se.sysdev.javaeeexamination.formdata;
+package se.sysdev.javaeeexamination.dto;
 
 import se.sysdev.javaeeexamination.model.Category;
 

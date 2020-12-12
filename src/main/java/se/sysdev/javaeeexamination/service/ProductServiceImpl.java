@@ -2,7 +2,7 @@ package se.sysdev.javaeeexamination.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import se.sysdev.javaeeexamination.formdata.ProductDto;
+import se.sysdev.javaeeexamination.dto.ProductDto;
 import se.sysdev.javaeeexamination.model.Category;
 import se.sysdev.javaeeexamination.model.Product;
 import se.sysdev.javaeeexamination.repository.CategoryRepository;
