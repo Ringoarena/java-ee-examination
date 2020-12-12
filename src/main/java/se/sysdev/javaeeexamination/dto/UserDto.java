@@ -1,10 +1,5 @@
 package se.sysdev.javaeeexamination.dto;
 
-import se.sysdev.javaeeexamination.model.Address;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class UserDto {
     private String name;
     private String password;

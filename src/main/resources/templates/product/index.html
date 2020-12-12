@@ -6,8 +6,10 @@
     <h1>Product list</h1>
     <div class="row">
         <form th:action="@{/products}" th:method="get">
-            <label for="searchbox">Filter</label>
-            <input type="text" th:value="${keyword}" id="searchbox" name="keyword"/>
+            <div class="input-field">
+                <input type="text" th:value="${keyword}" id="searchbox" name="keyword"/>
+                <label for="searchbox">Filter</label>
+            </div>
             <div class="input-field">
                 <select class="select-category" name="categoryIndex">
                     <option th:value="-1">All products</option>

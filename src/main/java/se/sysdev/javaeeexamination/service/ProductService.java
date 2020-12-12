@@ -1,6 +1,7 @@
 package se.sysdev.javaeeexamination.service;
 
 import se.sysdev.javaeeexamination.dto.ProductDto;
+import se.sysdev.javaeeexamination.dto.ProductForm;
 import se.sysdev.javaeeexamination.model.Category;
 import se.sysdev.javaeeexamination.model.Product;
 
@@ -9,7 +10,7 @@ import java.util.Optional;
 
 public interface ProductService {
 
-    Product createProduct(ProductDto dto);
+    void createProduct(ProductDto productDto);
 
     List<Product> findAll();
 

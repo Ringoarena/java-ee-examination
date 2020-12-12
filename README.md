@@ -2,9 +2,7 @@
 
 Features todo
 - A basic testing suite exists for implemented key components (cart)
-  
-GUI
-- Admin can add new products
+
  REST
 - Admin can list all orders
 - Admin can change "processed" to "true"
@@ -12,6 +10,7 @@ GUI
 - Admin can add new products
 
 Features completed
+- Admin can add new products
 - Admin can create new category
 - Admin can list all orders
 - Admin can change "processed" to "true"

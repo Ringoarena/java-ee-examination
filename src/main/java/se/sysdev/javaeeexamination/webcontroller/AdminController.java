@@ -5,8 +5,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import se.sysdev.javaeeexamination.dto.CategoryDto;
+import se.sysdev.javaeeexamination.dto.ProductDto;
+import se.sysdev.javaeeexamination.dto.ProductForm;
+import se.sysdev.javaeeexamination.model.Category;
 import se.sysdev.javaeeexamination.service.CategoryService;
 import se.sysdev.javaeeexamination.service.OrderService;
+import se.sysdev.javaeeexamination.service.ProductService;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/admin")
@@ -15,11 +21,15 @@ public class AdminController {
     private OrderService orderService;
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private ProductService productService;
 
     @GetMapping
     public String showAdminIndex(Model model) {
         model.addAttribute("orders", orderService.getOrders());
+        model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("categorydto", new CategoryDto());
+        model.addAttribute("productform", new ProductForm());
         return "admin/index";
     }
 
@@ -30,9 +40,23 @@ public class AdminController {
     }
 
     @PostMapping("/category")
-    public String handleNewCategory(@ModelAttribute("categorydto") CategoryDto categoryDto) {
-        System.out.println(categoryDto.getName());
+    public String submitNewCategory(@ModelAttribute("categorydto") CategoryDto categoryDto) {
         categoryService.createCategory(categoryDto);
+        return "redirect:/admin";
+    }
+
+    @PostMapping("/product")
+    public String submitNewProduct(@ModelAttribute("productdto") ProductForm form) {
+        Optional<Category> optionalCategory = categoryService.findById(form.getCategoryId());
+        if (!optionalCategory.isPresent()) {
+            return "index";
+        }
+        ProductDto productDto = new ProductDto(form.getName()
+                , form.getDescription()
+                , form.getImgName()
+                , form.getPrice()
+                , optionalCategory.get());
+        productService.createProduct(productDto);
         return "redirect:/admin";
     }
 

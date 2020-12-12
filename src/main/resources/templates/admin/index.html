@@ -43,17 +43,44 @@
                 </li>
             </ul>
             <div id="product-tab-content" class="col s12">
-                <p>Name:</p>
-                <p>Desc:</p>
-                <p>Price:</p>
+                <form th:action="@{/admin/product}" th:object="${productform}" th:method="post">
+                    <div class="input-field">
+                        <input type="text" th:field="*{name}" id="product-name">
+                        <label for="product-name">Name</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="text" th:field="*{description}" id="product-description">
+                        <label for="product-description">Description</label>
+                    </div>
+                    <div class="input-field">
+                        <select class="select-category" th:field="*{imgName}">
+                            <option th:value="cento10ndr.jpg">NDR</option>
+                            <option th:value="cento10sl.jpg">SL</option>
+                            <option th:value="radioshackjersey.jpg">Jersey</option>
+                        </select>
+                    </div>
+                    <div class="input-field">
+                        <input type="number" th:field="*{price}" id="product-price">
+                        <label for="product-price">Price €</label>
+                    </div>
+                    <div class="input-field">
+                        <select class="select-category" th:field="*{categoryId}">
+                            <option th:each="cat : ${categories}"
+                                    th:value="${cat.getId()}"
+                                    th:text="${cat.getName()}"></option>
+                        </select>
+                        <label>Category</label>
+                    </div>
+                    <input type="submit" class="btn red accent-2" value="Submit">
+                </form>
             </div>
             <div id="category-tab-content" class="col s12">
                 <form th:action="@{/admin/category}" th:object="${categorydto}" th:method="post">
                     <div class="input-field">
-                        <input type="text" th:field="*{name}" id="category-name" />
+                        <input type="text" th:field="*{name}" id="category-name">
                         <label for="category-name">Name</label>
                     </div>
-                    <input type="submit" class="btn red accent-2" value="Submit" />
+                    <input type="submit" class="btn red accent-2" value="Submit">
                 </form>
             </div>
         </div>

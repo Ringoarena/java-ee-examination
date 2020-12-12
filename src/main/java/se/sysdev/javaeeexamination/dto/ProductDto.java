@@ -4,33 +4,36 @@ import se.sysdev.javaeeexamination.model.Category;
 
 public class ProductDto {
     private String name;
-    private Long price;
+    private String description;
+    private String imgName;
+    private double price;
     private Category category;
 
-    public ProductDto() {
+    public ProductDto(String name, String description, String imgName, double price, Category category) {
+        this.name = name;
+        this.description = description;
+        this.imgName = imgName;
+        this.price = price;
+        this.category = category;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getDescription() {
+        return description;
     }
 
-    public Long getPrice() {
+    public String getImgName() {
+        return imgName;
+    }
+
+    public double getPrice() {
         return price;
-    }
-
-    public void setPrice(Long price) {
-        this.price = price;
     }
 
     public Category getCategory() {
         return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
     }
 }

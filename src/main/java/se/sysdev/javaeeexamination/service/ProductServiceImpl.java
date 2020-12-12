@@ -3,8 +3,10 @@ package se.sysdev.javaeeexamination.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.sysdev.javaeeexamination.dto.ProductDto;
+import se.sysdev.javaeeexamination.dto.ProductForm;
 import se.sysdev.javaeeexamination.model.Category;
 import se.sysdev.javaeeexamination.model.Product;
+import se.sysdev.javaeeexamination.repository.CategoryRepository;
 import se.sysdev.javaeeexamination.repository.ProductRepository;
 
 import java.util.List;
@@ -14,10 +16,13 @@ import java.util.Optional;
 public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @Override
-    public Product createProduct(ProductDto dto) {
-        return productRepository.save(new Product(dto.getName(), dto.getPrice(), dto.getCategory()));
+    public void createProduct(ProductDto dto) {
+        Product product = new Product(dto.getName(), dto.getDescription(), dto.getImgName(), dto.getPrice(), dto.getCategory());
+        productRepository.save(product);
     }
 
     @Override
