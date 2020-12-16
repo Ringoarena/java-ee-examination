@@ -1,4 +1,4 @@
-package se.sysdev.javaeeexamination.webcontroller;
+package se.sysdev.javaeeexamination.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
