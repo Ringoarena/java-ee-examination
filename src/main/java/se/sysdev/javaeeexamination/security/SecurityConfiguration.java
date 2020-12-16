@@ -56,8 +56,8 @@ public class SecurityConfiguration {
                     .authorizeRequests()
                     .antMatchers("/api/authenticate").permitAll()
                     .antMatchers("/api/**").hasRole(UserRole.ADMIN.name())
-                    .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-            http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+                    .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                    .and().addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         }
 
         @Override
