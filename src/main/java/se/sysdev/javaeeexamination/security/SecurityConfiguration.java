@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,7 +17,6 @@ import se.sysdev.javaeeexamination.service.UserService;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
-    
     @Autowired
     private UserService userService;
 
@@ -31,6 +31,32 @@ public class SecurityConfiguration {
         auth.setUserDetailsService(userService);
         auth.setPasswordEncoder(passwordEncoder());
         return auth;
+    }
+
+    @Configuration
+    @Order(1)
+    public static class RestApiSecurityConfiguration extends WebSecurityConfigurerAdapter {
+        @Autowired
+        private DaoAuthenticationProvider daoAuthenticationProvider;
+
+        @Override
+        protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+            auth.authenticationProvider(daoAuthenticationProvider);
+        }
+
+        @Override
+        protected void configure(HttpSecurity http) throws Exception {
+            http.csrf().disable()
+                    .authorizeRequests()
+                    .antMatchers("/api/authenticate").permitAll()
+                    .anyRequest().authenticated();
+        }
+
+        @Override
+        @Bean
+        public AuthenticationManager authenticationManagerBean() throws Exception {
+            return super.authenticationManagerBean();
+        }
     }
 
     @Configuration
