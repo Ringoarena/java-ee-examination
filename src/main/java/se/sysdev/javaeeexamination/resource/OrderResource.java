@@ -39,6 +39,11 @@ public class OrderResource {
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
 
+    @GetMapping("/orders")
+    public ResponseEntity<?> getOrders() {
+        return ResponseEntity.ok(orderService.getOrders());
+    }
+
     @GetMapping("/private")
     public String getPrivateData() {
         return "Private";
