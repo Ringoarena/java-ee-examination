@@ -1,12 +1,12 @@
-package se.sysdev.javaeeexamination.dto;
+package se.sysdev.javaeeexamination.formdata;
 
-public class OrderId {
+public class OrderIdFormData {
     private Long orderId;
 
-    public OrderId() {
+    public OrderIdFormData() {
     }
 
-    public OrderId(Long orderId) {
+    public OrderIdFormData(Long orderId) {
         this.orderId = orderId;
     }
 

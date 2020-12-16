@@ -22,11 +22,11 @@
                     <td th:text="${order.getOrderTotal()}"></td>
                     <td>
                         <a th:if="${order.isProcessed()}"
-                           th:href="@{/admin/processed/{orderId}(orderId=${order.getId()})}">
+                           th:href="@{/admin/processed/{orderIdFormData}(orderIdFormData=${order.getId()})}">
                             <i class="material-icons red-text">check_box</i>
                         </a>
                         <a th:unless="${order.isProcessed()}"
-                           th:href="@{/admin/processed/{orderId}(orderId=${order.getId()})}">
+                           th:href="@{/admin/processed/{orderIdFormData}(orderIdFormData=${order.getId()})}">
                             <i class="material-icons red-text">check_box_outline_blank</i>
                         </a>
                     </td>

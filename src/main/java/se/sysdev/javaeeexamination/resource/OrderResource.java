@@ -2,14 +2,13 @@ package se.sysdev.javaeeexamination.resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-import se.sysdev.javaeeexamination.dto.OrderId;
+import se.sysdev.javaeeexamination.formdata.OrderIdFormData;
 import se.sysdev.javaeeexamination.security.jwt.AuthenticationRequest;
 import se.sysdev.javaeeexamination.security.jwt.AuthenticationResponse;
 import se.sysdev.javaeeexamination.security.jwt.JwtUtil;
@@ -48,8 +47,8 @@ public class OrderResource {
     }
 
     @PostMapping("/processed")
-    public ResponseEntity<?> toggleOrderIsProcessed(@RequestBody OrderId orderId) {
-        orderService.toggleOrderIsProcessed(orderId.getOrderId());
+    public ResponseEntity<?> toggleOrderIsProcessed(@RequestBody OrderIdFormData orderIdFormData) {
+        orderService.toggleOrderIsProcessed(orderIdFormData.getOrderId());
         return ResponseEntity.ok(HttpEntity.EMPTY);
     }
 }
