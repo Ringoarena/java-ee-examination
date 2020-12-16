@@ -21,5 +21,5 @@ public class OrderResource {
     public String getPrivateData() {
         return "Private";
     }
-    
+
 }
