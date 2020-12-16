@@ -52,9 +52,10 @@ public class SecurityConfiguration {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http.csrf().disable()
+                    .antMatcher("/api/**")
                     .authorizeRequests()
                     .antMatchers("/api/authenticate").permitAll()
-                    .anyRequest().hasRole(UserRole.ADMIN.name())
+                    .antMatchers("/api/**").hasRole(UserRole.ADMIN.name())
                     .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
             http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         }
