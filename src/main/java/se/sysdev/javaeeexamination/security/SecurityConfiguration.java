@@ -54,7 +54,7 @@ public class SecurityConfiguration {
             http.csrf().disable()
                     .authorizeRequests()
                     .antMatchers("/api/authenticate").permitAll()
-                    .anyRequest().authenticated()
+                    .anyRequest().hasRole(UserRole.ADMIN.name())
                     .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
             http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         }
