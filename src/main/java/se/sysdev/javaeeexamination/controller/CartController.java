@@ -45,7 +45,7 @@ public class CartController {
         }
         String message = String.format("Product with id %d not found", productId);
         model.addAttribute("message", message);
-        return "error_page";
+        return "error";
     }
 
     @GetMapping("/increase/{productId}")

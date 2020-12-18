@@ -51,7 +51,7 @@ public class AdminController {
         if (!optionalCategory.isPresent()) {
             String message = String.format("Category with id %d not found", form.getCategoryId());
             model.addAttribute("message", message);
-            return "error_page";
+            return "error";
         }
         ProductDto productDto = new ProductDto(form.getName()
                 , form.getDescription()
