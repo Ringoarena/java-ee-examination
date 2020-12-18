@@ -34,7 +34,7 @@ public class AuthController {
     public String handleUserRegistration(@Valid @ModelAttribute("userdto") UserFormData userFormData, Errors errors, Model model) {
         if (!errors.hasErrors()) {
             userService.registerUser(userFormData);
-            model.addAttribute("message", "Registration successful...");
+            model.addAttribute("message", "Registration successful!");
             model.addAttribute("userdto", new UserFormData());
         }
         return "auth/registration";

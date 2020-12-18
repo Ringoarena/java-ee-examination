@@ -11,6 +11,7 @@
     </form>
     <p>New user? Register <a th:href="@{/auth/registration}">here</a></p></p>
     <p th:if="${param.logout}">Logout successful!</p>
+    <p th:if="${param.error}" class="red-text">Bad credentials!</p>
 </div>
 </body>
 </html>
