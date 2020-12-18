@@ -5,15 +5,34 @@
 <div layout:fragment="content" class="container">
     <h1>User registration</h1>
     <form th:action="@{/auth/registration}" th:object="${userdto}" th:method="post">
-        <input type="text" th:field="*{name}" placeholder="Enter name" required>
-        <input type="password" th:field="*{password}" placeholder="Enter password" required>
-        <input type="email" th:field="*{email}" placeholder="Enter email" required>
-        <input type="text" th:field="*{city}" placeholder="Enter city" required>
-        <input type="text" th:field="*{street}" placeholder="Enter street" required>
+        <div class="input-field">
+            <input type="text" th:field="*{name}" id="name">
+            <label for="name">Name</label>
+            <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="red-text"></p>
+        </div>
+        <div class="input-field">
+            <input type="password" th:field="*{password}" id="password">
+            <label for="password">Password</label>
+            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="red-text"></p>
+        </div>
+        <div class="input-field">
+            <input type="text" th:field="*{email}" id="email">
+            <label for="email">Email</label>
+            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="red-text"></p>
+        </div>
+        <div class="input-field">
+            <input type="text" th:field="*{city}" id="city">
+            <label for="city">City</label>
+            <p th:if="${#fields.hasErrors('city')}" th:errors="*{city}" class="red-text"></p>
+        </div>
+        <div class="input-field">
+            <input type="text" th:field="*{street}" id="street">
+            <label for="street">Street</label>
+            <p th:if="${#fields.hasErrors('street')}" th:errors="*{street}" class="red-text"></p>
+        </div>
         <input class="btn red accent-2" type="submit" value="Submit">
     </form>
-    <p th:if="${param.success}">Registration successful!</p>
-    <p th:if="${param.failure}">Registration failed!</p>
+<h5 th:text="${message}"></h5>
 </div>
 </body>
 </html>

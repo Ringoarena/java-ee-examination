@@ -1,10 +1,19 @@
 package se.sysdev.javaeeexamination.formdata;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 public class UserFormData {
+    @NotBlank(message = "Name is required")
     private String name;
+    @Size(min = 3, message = "Password needs at least 3 characters")
     private String password;
+    @Email(regexp = "^([a-z\\d\\.-]+)@([a-z\\d-]+)\\.([a-z]{2,8})(\\.[a-z]{2,8})?$", message = "Enter valid email")
     private String email;
+    @NotBlank(message = "City is required")
     private String city;
+    @NotBlank(message = "Street is required")
     private String street;
 
     public UserFormData() {
