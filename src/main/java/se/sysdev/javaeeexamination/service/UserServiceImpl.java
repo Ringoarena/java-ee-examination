@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
     private BCryptPasswordEncoder passwordEncoder;
 
     @Override
-    public boolean registerUser(UserFormData userFormData) {
+    public void registerUser(UserFormData userFormData) {
         User user = new User(userFormData.getName()
                 , passwordEncoder.encode(userFormData.getPassword())
                 , userFormData.getEmail()
@@ -33,9 +33,7 @@ public class UserServiceImpl implements UserService {
             userRepository.save(user);
         } catch (ConstraintViolationException e) {
             e.printStackTrace();
-            return false;
         }
-        return true;
     }
 
     @Override
