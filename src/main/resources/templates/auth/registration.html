@@ -19,6 +19,7 @@
             <input type="text" th:field="*{email}" id="email">
             <label for="email">Email</label>
             <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="red-text"></p>
+            <p th:text="${serviceResponseMsg}" class="red-text"></p>
         </div>
         <div class="input-field">
             <input type="text" th:field="*{city}" id="city">

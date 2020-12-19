@@ -1,6 +1,7 @@
 package se.sysdev.javaeeexamination.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -12,7 +13,6 @@ import se.sysdev.javaeeexamination.repository.UserRepository;
 import se.sysdev.javaeeexamination.security.CustomUserDetails;
 import se.sysdev.javaeeexamination.security.UserRole;
 
-import javax.validation.ConstraintViolationException;
 import java.util.*;
 
 @Service
@@ -23,7 +23,9 @@ public class UserServiceImpl implements UserService {
     private BCryptPasswordEncoder passwordEncoder;
 
     @Override
-    public void registerUser(UserFormData userFormData) {
+    public ServiceResponse registerUser(UserFormData userFormData) {
+        ServiceResponse response = new ServiceResponse();
+        response.setHasErrors(false);
         User user = new User(userFormData.getName()
                 , passwordEncoder.encode(userFormData.getPassword())
                 , userFormData.getEmail()
@@ -31,9 +33,11 @@ public class UserServiceImpl implements UserService {
                 , UserRole.CUSTOMER);
         try {
             userRepository.save(user);
-        } catch (ConstraintViolationException e) {
-            e.printStackTrace();
+        } catch (DataIntegrityViolationException e) {
+            response.setHasErrors(true);
+            response.setMessage("Email already exists.");
         }
+        return response;
     }
 
     @Override
