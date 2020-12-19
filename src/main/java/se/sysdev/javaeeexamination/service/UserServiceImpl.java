@@ -2,6 +2,7 @@ package se.sysdev.javaeeexamination.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -10,7 +11,6 @@ import se.sysdev.javaeeexamination.formdata.UserFormData;
 import se.sysdev.javaeeexamination.model.Address;
 import se.sysdev.javaeeexamination.model.User;
 import se.sysdev.javaeeexamination.repository.UserRepository;
-import se.sysdev.javaeeexamination.security.CustomUserDetails;
 import se.sysdev.javaeeexamination.security.UserRole;
 
 import java.util.*;
@@ -51,6 +51,10 @@ public class UserServiceImpl implements UserService {
         if (!optional.isPresent()) {
             throw new UsernameNotFoundException("User with email " + email + " not found.");
         }
-        return new CustomUserDetails(optional.get());
+        User user = optional.get();
+        return new org.springframework.security.core.userdetails.User(
+                user.getEmail(),
+                user.getPassword(),
+                Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getUserRole())));
     }
 }
