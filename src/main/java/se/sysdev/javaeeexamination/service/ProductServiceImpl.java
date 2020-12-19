@@ -1,22 +1,21 @@
 package se.sysdev.javaeeexamination.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import se.sysdev.javaeeexamination.dto.ProductDto;
 import se.sysdev.javaeeexamination.model.Category;
 import se.sysdev.javaeeexamination.model.Product;
-import se.sysdev.javaeeexamination.repository.CategoryRepository;
 import se.sysdev.javaeeexamination.repository.ProductRepository;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
-    @Autowired
-    private CategoryRepository categoryRepository;
 
     @Override
     public void createProduct(ProductDto dto) {
@@ -25,8 +24,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> findAll() {
-        return productRepository.findAll();
+    public Page<Product> findAll() {
+        Pageable pageable = PageRequest.of(0, 9);
+        return productRepository.findAll(pageable);
     }
 
     @Override
@@ -35,15 +35,17 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> findByKeyword(String keyword) {
+    public Page<Product> findByKeyword(String keyword) {
+        Pageable pageable = PageRequest.of(0, 9);
         if (keyword != null) {
-            return productRepository.findProductsByNameContains(keyword);
+            return productRepository.findProductsByNameContains(pageable, keyword);
         }
-        return productRepository.findAll();
+        return productRepository.findAll(pageable);
     }
 
     @Override
-    public List<Product> findByCategoryAndKeyword(Category category, String keyword) {
-        return productRepository.findProductsByCategoryEqualsAndNameContains(category, keyword);
+    public Page<Product> findByCategoryAndKeyword(Category category, String keyword) {
+        Pageable pageable = PageRequest.of(0, 9);
+        return productRepository.findProductsByCategoryEqualsAndNameContains(pageable, category, keyword);
     }
 }

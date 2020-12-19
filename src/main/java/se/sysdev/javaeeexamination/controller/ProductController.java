@@ -1,12 +1,14 @@
 package se.sysdev.javaeeexamination.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import se.sysdev.javaeeexamination.model.Category;
+import se.sysdev.javaeeexamination.model.Product;
 import se.sysdev.javaeeexamination.service.CategoryService;
 import se.sysdev.javaeeexamination.service.ProductService;
 
@@ -31,7 +33,13 @@ public class ProductController {
         model.addAttribute("catIndex", categoryIndex);
         model.addAttribute("categories", categoryList);
         if (categoryIndex == -1) {
-            model.addAttribute("products", productService.findByKeyword(keyword));
+            Page<Product> page = productService.findByKeyword(keyword);
+            Long totalItems = page.getTotalElements();
+            int totalPages = page.getTotalPages();
+            List<Product> listProducts = page.getContent();
+            model.addAttribute("products", listProducts);
+            model.addAttribute("totalItems", totalItems);
+            model.addAttribute("totalPages", totalPages);
         } else {
             Category selectedCategory = categoryList.get(categoryIndex);
             model.addAttribute("products", productService.findByCategoryAndKeyword(selectedCategory, keyword));

@@ -1,17 +1,17 @@
 package se.sysdev.javaeeexamination.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 import se.sysdev.javaeeexamination.model.Category;
 import se.sysdev.javaeeexamination.model.Product;
 
-import java.util.List;
-
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface ProductRepository extends PagingAndSortingRepository<Product, Long> {
 
-    List<Product> findProductsByNameContains(String keyword);
+    Page<Product> findProductsByNameContains(Pageable pageable, String keyword);
 
-    List<Product> findProductsByCategoryEqualsAndNameContains(Category category, String keyword);
+    Page<Product> findProductsByCategoryEqualsAndNameContains(Pageable pageable, Category category, String keyword);
 
 }
