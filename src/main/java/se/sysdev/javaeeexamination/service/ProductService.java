@@ -1,7 +1,6 @@
 package se.sysdev.javaeeexamination.service;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Sort;
 import se.sysdev.javaeeexamination.dto.ProductDto;
 import se.sysdev.javaeeexamination.model.Category;
 import se.sysdev.javaeeexamination.model.Product;
