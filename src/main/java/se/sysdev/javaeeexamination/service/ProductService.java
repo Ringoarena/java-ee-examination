@@ -11,12 +11,10 @@ public interface ProductService {
 
     void createProduct(ProductDto productDto);
 
-    Page<Product> findAll();
-
     Optional<Product> findById(Long id);
 
-    Page<Product> findByKeyword(String keyword);
+    Page<Product> findByKeyword(String keyword, int pageNumber);
 
-    Page<Product> findByCategoryAndKeyword(Category category, String keyword);
+    Page<Product> findByCategoryAndKeyword(Category category, String keyword, int pageNumber);
 
 }

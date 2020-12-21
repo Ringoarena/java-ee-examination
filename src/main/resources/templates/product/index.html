@@ -22,13 +22,11 @@
             <a class="btn red accent-2" th:href="@{/products}">Clear</a>
         </form>
     </div>
-    <h5 class="red-text" th:text="${message}"></h5>
     <div class="row">
         <div class="col s12 l4 hoverable" th:each="product : ${products}">
             <div class="card">
                 <div class="card-image">
-                    <img th:src="@{/images/{image}(image=${product.imgName})}" class="materialboxed"
-                         alt="Cento 10 Drag Reduction">
+                    <img th:src="@{/images/{image}(image=${product.imgName})}" class="materialboxed">
                 </div>
                 <div class="card-content">
                     <span class="card-title" th:text="${product.name}"></span>
@@ -44,7 +42,16 @@
         </div>
     </div>
     <div>
-        <p>Total items: <span th:text="${totalItems}"></span></p>
+        <span>Total items: <span th:text="${totalItems}"></span></span>
+        <span> - Page <span th:text="${currentPage}"></span> of <span th:text="${totalPages}"></span></span>
+        <span> -
+            <span th:each="i : ${#numbers.sequence(1, totalPages)}">
+                <a th:if="${i != currentPage}"
+                   th:href="@{/products/page/{p}(p=${i}, keyword=${keyword}, categoryIndex=${catIndex})}"
+                   th:text="${i}"></a>
+                <span th:unless="${i != currentPage}" th:text="${i}"></span>
+            </span>
+        </span>
     </div>
 </div>
 </body>

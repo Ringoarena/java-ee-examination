@@ -24,19 +24,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Page<Product> findAll() {
-        Pageable pageable = PageRequest.of(0, 9);
-        return productRepository.findAll(pageable);
-    }
-
-    @Override
     public Optional<Product> findById(Long id) {
         return productRepository.findById(id);
     }
 
     @Override
-    public Page<Product> findByKeyword(String keyword) {
-        Pageable pageable = PageRequest.of(0, 9);
+    public Page<Product> findByKeyword(String keyword, int pageNumber) {
+        Pageable pageable = PageRequest.of(pageNumber - 1, 3);
         if (keyword != null) {
             return productRepository.findProductsByNameContains(pageable, keyword);
         }
@@ -44,8 +38,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Page<Product> findByCategoryAndKeyword(Category category, String keyword) {
-        Pageable pageable = PageRequest.of(0, 9);
+    public Page<Product> findByCategoryAndKeyword(Category category, String keyword, int pageNumber) {
+        Pageable pageable = PageRequest.of(pageNumber - 1, 3);
         return productRepository.findProductsByCategoryEqualsAndNameContains(pageable, category, keyword);
     }
 }

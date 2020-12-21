@@ -30,9 +30,9 @@ public class CartController {
             model.addAttribute("carttotal", cartService.getCartTotal());
             return "cart/index";
         } else {
-            model.addAttribute("products", productService.findAll());
+//            model.addAttribute("products", productService.findAll());
             model.addAttribute("message", "Add products before viewing cart!");
-            return "product/index";
+            return "error";
         }
     }
 
