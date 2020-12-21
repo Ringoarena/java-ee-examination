@@ -3,20 +3,38 @@
       xmlns:th="http://www.thymeleaf.org">
 <body>
 <div layout:fragment="content" class="container">
+    <th:block th:if="${message}">
+        <h5 th:text="${message}" class="red-text"></h5>
+    </th:block>
     <h1>Product list</h1>
     <div class="row">
         <form th:action="@{/products}" th:method="get">
             <div class="input-field">
                 <input type="text" th:value="${keyword}" id="searchbox" name="keyword"/>
-                <label for="searchbox">Filter</label>
+                <label for="searchbox">Search</label>
             </div>
             <div class="input-field">
-                <select class="select-category" name="categoryIndex">
+                <select class="select-dropdown" name="categoryIndex">
                     <option th:value="-1">All products</option>
                     <option th:each="cat, iStat : ${categories}" th:selected="${catIndex == iStat.index}"
                             th:value="${iStat.index}" th:text="${cat.name}"></option>
                 </select>
                 <label>Category</label>
+            </div>
+            <div class="input-field">
+                <select class="select-dropdown" name="sortStrategy">
+                    <option th:value="name" th:selected="${sortStrategy == 'name'}">Name</option>
+                    <option th:value="price" th:selected="${sortStrategy == 'price'}">Price</option>
+                    <option th:value="description" th:selected="${sortStrategy == 'description'}">Description</option>
+                </select>
+                <label>Sort by</label>
+            </div>
+            <div class="input-field">
+                <select class="select-dropdown" name="ascDesc">
+                    <option th:value="asc" th:selected="${ascDesc == 'asc'}">Ascending</option>
+                    <option th:value="desc" th:selected="${ascDesc == 'desc'}">Descending</option>
+                </select>
+                <label>Ascending / Descending</label>
             </div>
             <input type="submit" class="btn red accent-2" value="Search"/>
             <a class="btn red accent-2" th:href="@{/products}">Clear</a>
@@ -42,7 +60,7 @@
         </div>
     </div>
     <div>
-        <span>Total items: <span th:text="${totalItems}"></span></span>
+        <span>Total items: <span th:text="${totalElements}"></span></span>
         <span> - Page <span th:text="${currentPage}"></span> of <span th:text="${totalPages}"></span></span>
         <span> -
             <span th:each="i : ${#numbers.sequence(1, totalPages)}">

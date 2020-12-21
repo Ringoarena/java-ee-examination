@@ -2,6 +2,7 @@ package se.sysdev.javaeeexamination.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,36 +25,40 @@ public class ProductController {
     private CategoryService categoryService;
 
     @GetMapping
-    public String showProductIndex(
-            Model model
-            , @RequestParam(name = "keyword", required = false, defaultValue = "") String keyword
-            , @RequestParam(name = "categoryIndex", required = false, defaultValue = "-1") int categoryIndex) {
-        return showProductsByPage(1, keyword, categoryIndex, model);
+    public String showProductIndex(@RequestParam(name = "keyword", required = false, defaultValue = "") String keyword,
+                                   @RequestParam(name = "categoryIndex", required = false, defaultValue = "-1") int categoryIndex,
+                                   @RequestParam(name = "sortStrategy", required = false, defaultValue = "name") String sortBy,
+                                   @RequestParam(name = "ascDesc", required = false, defaultValue = "asc") String ascDesc,
+                                   Model model) {
+        return showProductsByPage(1, keyword, categoryIndex, sortBy, ascDesc, model);
     }
 
     @GetMapping("/page/{pageNumber}")
     private String showProductsByPage(@PathVariable("pageNumber") int currentPage,
                                       @RequestParam(name = "keyword", required = false, defaultValue = "") String keyword,
                                       @RequestParam(name = "categoryIndex", required = false, defaultValue = "-1") int categoryIndex,
+                                      @RequestParam(name = "sortStrategy", required = false, defaultValue = "name") String sortBy,
+                                      @RequestParam(name = "ascDesc", required = false, defaultValue = "asc") String ascDesc,
                                       Model model) {
         List<Category> categoryList = categoryService.findAll();
         Page<Product> page;
-        List<Product> products;
         if (categoryIndex == -1) {
-            page = productService.findByKeyword(keyword, currentPage);
+            page = productService.findByKeyword(keyword, currentPage, sortBy, ascDesc);
         } else {
             Category selectedCategory = categoryList.get(categoryIndex);
-            page = productService.findByCategoryAndKeyword(selectedCategory, keyword, currentPage);
+            page = productService.findByCategoryAndKeyword(selectedCategory, keyword, currentPage, sortBy, ascDesc);
         }
-        Long totalItems = page.getTotalElements();
+        List<Product> products = page.getContent();
+        Long totalElements = page.getTotalElements();
         int totalPages = page.getTotalPages();
-        products = page.getContent();
-        model.addAttribute("currentPage", currentPage);
-        model.addAttribute("totalItems", totalItems);
-        model.addAttribute("totalPages", totalPages);
         model.addAttribute("products", products);
+        model.addAttribute("totalElements", totalElements);
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("totalPages", totalPages);
         model.addAttribute("keyword", keyword);
         model.addAttribute("catIndex", categoryIndex);
+        model.addAttribute("sortStrategy", sortBy);
+        model.addAttribute("ascDesc", ascDesc);
         model.addAttribute("categories", categoryList);
         return "product/index";
 

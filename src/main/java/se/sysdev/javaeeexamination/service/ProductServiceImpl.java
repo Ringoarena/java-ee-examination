@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import se.sysdev.javaeeexamination.dto.ProductDto;
 import se.sysdev.javaeeexamination.model.Category;
@@ -29,8 +30,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Page<Product> findByKeyword(String keyword, int pageNumber) {
-        Pageable pageable = PageRequest.of(pageNumber - 1, 3);
+    public Page<Product> findByKeyword(String keyword, int pageNumber, String sortBy, String ascDesc) {
+        Sort sort = Sort.by(sortBy);
+        sort = ascDesc.equals("asc") ? sort.ascending() : sort.descending();
+        Pageable pageable = PageRequest.of(pageNumber - 1, 3, sort);
         if (keyword != null) {
             return productRepository.findProductsByNameContains(pageable, keyword);
         }
@@ -38,8 +41,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Page<Product> findByCategoryAndKeyword(Category category, String keyword, int pageNumber) {
-        Pageable pageable = PageRequest.of(pageNumber - 1, 3);
+    public Page<Product> findByCategoryAndKeyword(Category category, String keyword, int pageNumber, String sortBy, String ascDesc) {
+        Sort sort = Sort.by(sortBy);
+        sort = ascDesc.equals("asc") ? sort.ascending() : sort.descending();
+        Pageable pageable = PageRequest.of(pageNumber - 1, 3, sort);
         return productRepository.findProductsByCategoryEqualsAndNameContains(pageable, category, keyword);
     }
 }

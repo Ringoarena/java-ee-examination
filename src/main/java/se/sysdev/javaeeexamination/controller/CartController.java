@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import se.sysdev.javaeeexamination.model.OrderLine;
 import se.sysdev.javaeeexamination.model.Product;
 import se.sysdev.javaeeexamination.service.CartService;
@@ -23,16 +24,15 @@ public class CartController {
     CartService cartService;
 
     @GetMapping
-    public String showCartIndex(Model model) {
+    public String showCartIndex(Model model, RedirectAttributes redirectAttributes) {
         List<OrderLine> orderLines = cartService.getOrderLines();
         if (orderLines.size() > 0) {
             model.addAttribute("orderlines", orderLines);
             model.addAttribute("carttotal", cartService.getCartTotal());
             return "cart/index";
         } else {
-//            model.addAttribute("products", productService.findAll());
-            model.addAttribute("message", "Add products before viewing cart!");
-            return "error";
+            redirectAttributes.addFlashAttribute("message", "Add products before viewing cart!");
+            return "redirect:/products";
         }
     }
 
