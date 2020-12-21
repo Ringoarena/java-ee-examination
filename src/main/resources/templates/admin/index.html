@@ -53,18 +53,19 @@
                         <label for="product-description">Description</label>
                     </div>
                     <div class="input-field">
-                        <select class="select-category" th:field="*{imgName}">
+                        <select class="select-dropdown" th:field="*{imgName}">
                             <option th:value="cento10ndr.jpg">NDR</option>
                             <option th:value="cento10sl.jpg">SL</option>
                             <option th:value="radioshackjersey.jpg">Jersey</option>
                         </select>
+                        <label>Image</label>
                     </div>
                     <div class="input-field">
                         <input type="number" th:field="*{price}" id="product-price">
                         <label for="product-price">Price €</label>
                     </div>
                     <div class="input-field">
-                        <select class="select-category" th:field="*{categoryId}">
+                        <select class="select-dropdown" th:field="*{categoryId}">
                             <option th:each="cat : ${categories}"
                                     th:value="${cat.getId()}"
                                     th:text="${cat.getName()}"></option>

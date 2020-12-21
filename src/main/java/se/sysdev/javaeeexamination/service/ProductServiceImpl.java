@@ -33,7 +33,7 @@ public class ProductServiceImpl implements ProductService {
     public Page<Product> findByKeyword(String keyword, int pageNumber, String sortBy, String ascDesc) {
         Sort sort = Sort.by(sortBy);
         sort = ascDesc.equals("asc") ? sort.ascending() : sort.descending();
-        Pageable pageable = PageRequest.of(pageNumber - 1, 3, sort);
+        Pageable pageable = PageRequest.of(pageNumber - 1, 6, sort);
         if (keyword != null) {
             return productRepository.findProductsByNameContains(pageable, keyword);
         }
@@ -44,7 +44,7 @@ public class ProductServiceImpl implements ProductService {
     public Page<Product> findByCategoryAndKeyword(Category category, String keyword, int pageNumber, String sortBy, String ascDesc) {
         Sort sort = Sort.by(sortBy);
         sort = ascDesc.equals("asc") ? sort.ascending() : sort.descending();
-        Pageable pageable = PageRequest.of(pageNumber - 1, 3, sort);
+        Pageable pageable = PageRequest.of(pageNumber - 1, 6, sort);
         return productRepository.findProductsByCategoryEqualsAndNameContains(pageable, category, keyword);
     }
 }
