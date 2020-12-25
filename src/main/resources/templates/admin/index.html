@@ -76,7 +76,7 @@
                 </form>
             </div>
             <div id="category-tab-content" class="col s12">
-                <form th:action="@{/admin/category}" th:object="${categorydto}" th:method="post">
+                <form th:action="@{/admin/category}" th:object="${categoryform}" th:method="post">
                     <div class="input-field">
                         <input type="text" th:field="*{name}" id="category-name">
                         <label for="category-name">Name</label>

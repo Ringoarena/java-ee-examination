@@ -28,7 +28,7 @@ public class AdminController {
     public String showAdminIndex(Model model) {
         model.addAttribute("orders", orderService.getOrders());
         model.addAttribute("categories", categoryService.findAll());
-        model.addAttribute("categorydto", new CategoryFormData());
+        model.addAttribute("categoryform", new CategoryFormData());
         model.addAttribute("productform", new ProductFormData());
         return "admin/index";
     }
@@ -40,13 +40,13 @@ public class AdminController {
     }
 
     @PostMapping("/category")
-    public String submitNewCategory(@ModelAttribute("categorydto") CategoryFormData categoryFormData) {
-        categoryService.createCategory(categoryFormData);
+    public String submitNewCategory(@ModelAttribute("categoryform") CategoryFormData form) {
+        categoryService.createCategory(form);
         return "redirect:/admin";
     }
 
     @PostMapping("/product")
-    public String submitNewProduct(@ModelAttribute("productdto") ProductFormData form, Model model) {
+    public String submitNewProduct(@ModelAttribute("productform") ProductFormData form, Model model) {
         Optional<Category> optionalCategory = categoryService.findById(form.getCategoryId());
         if (!optionalCategory.isPresent()) {
             String message = String.format("Category with id %d not found", form.getCategoryId());
