@@ -17,23 +17,40 @@ public class CartServiceImpl implements CartService {
     @Override
     public void addToCart(Product product) {
         if (cartContainsProduct(product)) {
-            incrementQuantity(product.getId());
+            increaseQuantity(product.getId());
         } else {
             doAddToCart(product);
         }
     }
 
+    private boolean cartContainsProduct(Product product) {
+        return orderLines.stream().anyMatch(orderLine -> orderLine.getProduct().getId().equals(product.getId()));
+    }
+
     @Override
     public void increaseQuantity(Long productId) {
-        if (cartContainsProductById(productId)) {
-            incrementQuantity(productId);
+        Optional<OrderLine> optional = orderLines.stream()
+                .filter(orderLine -> orderLine.getProduct().getId().equals(productId)).findFirst();
+        if (optional.isPresent()) {
+            OrderLine item = optional.get();
+            item.setQuantity(item.getQuantity() + 1);
         }
+    }
+
+    private void doAddToCart(Product product) {
+        orderLines.add(new OrderLine(product, 1));
     }
 
     @Override
     public void reduceQuantity(Long productId) {
-        if (cartContainsProductById(productId)) {
-            decrementQuantity(productId);
+        Optional<OrderLine> optional = orderLines.stream()
+                .filter(orderLine -> orderLine.getProduct().getId().equals(productId)).findFirst();
+        if (optional.isPresent()) {
+            OrderLine item = optional.get();
+            item.setQuantity(item.getQuantity() - 1);
+            if (item.getQuantity() == 0) {
+                orderLines.remove(item);
+            }
         }
     }
 
@@ -61,36 +78,4 @@ public class CartServiceImpl implements CartService {
         orderLines = new ArrayList<>();
     }
 
-    private boolean cartContainsProduct(Product product) {
-        return orderLines.stream().anyMatch(orderLine -> orderLine.getProduct().getId().equals(product.getId()));
-    }
-
-    private boolean cartContainsProductById(Long productId) {
-        return orderLines.stream().anyMatch(orderLine -> orderLine.getProduct().getId().equals(productId));
-    }
-
-    private void decrementQuantity(Long productId) {
-        Optional<OrderLine> optional = orderLines.stream()
-                .filter(orderLine -> orderLine.getProduct().getId().equals(productId)).findFirst();
-        if (optional.isPresent()) {
-            OrderLine item = optional.get();
-            item.setQuantity(item.getQuantity() - 1);
-            if (item.getQuantity() == 0) {
-                orderLines.remove(item);
-            }
-        }
-    }
-
-    private void incrementQuantity(Long productId) {
-        Optional<OrderLine> optional = orderLines.stream()
-                .filter(orderLine -> orderLine.getProduct().getId().equals(productId)).findFirst();
-        if (optional.isPresent()) {
-            OrderLine item = optional.get();
-            item.setQuantity(item.getQuantity() + 1);
-        }
-    }
-
-    private void doAddToCart(Product product) {
-        orderLines.add(new OrderLine(product, 1));
-    }
 }

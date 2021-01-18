@@ -44,10 +44,10 @@ public class OrderController {
 
     @PostMapping("/submit")
     public String handleSubmitOrder(Principal principal) {
-        Optional<User> optionalUser = userService.findByEmail(principal.getName());
-        if (optionalUser.isPresent()) {
+        Optional<User> optional = userService.findByEmail(principal.getName());
+        if (optional.isPresent()) {
             List<OrderLine> orderLines = cartService.getOrderLines();
-            User user = optionalUser.get();
+            User user = optional.get();
             orderService.submitOrder(orderLines, user);
             cartService.clearCart();
             return "redirect:/order/confirmation";
